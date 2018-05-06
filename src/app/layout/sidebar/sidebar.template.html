@@ -1,0 +1,102 @@
+<div class="js-sidebar-content">
+  <header class="logo d-none d-md-block">
+    <a href="index.html">{{config.name}}</a>
+  </header>
+  <!--<div class="sidebar-status d-md-none dropdown" dropdown [autoClose]="false" (isOpenChange)="toggleSidebarOverflow($event)" placement="bottom left">
+    <a [routerLink]="" class="dropdown-toggle" dropdownToggle>
+              <span class="thumb-sm avatar float-right">
+        <img class="rounded-circle" src="assets/img/people/a5.jpg" alt="...">
+              </span>
+       .circle is a pretty cool way to add a bit of beauty to raw data.
+           should be used with bg-* and text-* classes for colors 
+              <span class="circle bg-warning fw-bold text-gray-dark">
+                  13
+              </span>
+      &nbsp;
+      Philip <strong>Smith</strong>
+      <b class="caret"></b>
+    </a>
+    <app-notifications *dropdownMenu class="dropdown-menu dropdown-menu-left animated animated-fast fadeInUp"></app-notifications>
+  </div>-->
+  <!-- main notification links are placed inside of .sidebar-nav -->
+  <ul class="sidebar-nav">
+    <li>
+      <a [routerLink]=" ['home'] ">
+        <span class="icon">
+          <i class="fa fa-dashboard"></i>
+        </span>
+        Главная
+      </a>
+    </li>
+    <li>
+      <a [routerLink]=" ['member'] ">
+        <span class="icon">
+          <i class="fa fa-globe"></i>
+        </span>
+        Делегаты
+      </a>
+    </li>
+    <li>
+      <a [routerLink]=" ['proposal'] ">
+        <span class="icon">
+          <i class="fa fa-bell-o"></i>
+        </span>
+        Кампании ожидающие верификации
+      </a>
+    </li>
+    <li>
+      <a [routerLink]=" ['campaignKnown'] ">
+        <span class="icon">
+          <i class="fa fa-check"></i>
+        </span>
+        Верифицированные кампании
+      </a>
+    </li>
+    <li>
+      <a [routerLink]=" ['campaignCompleted'] ">
+        <span class="icon">
+          <i class="fa fa-coffee fa-fw"></i>
+        </span>
+        Завершенные Кампании
+      </a>
+    </li>
+    <li>
+      <a [routerLink]=" ['faq'] ">
+        <span class="icon">
+          <i class="fa fa-child"></i>
+        </span>
+        FAQ
+      </a>
+    </li>
+    <!--<li>
+      <a [routerLink]=" ['dashboard'] ">
+        <span class="icon">
+          <i class="fa fa-child"></i>
+        </span>
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a [routerLink]=" ['another-page'] ">
+        <span class="icon">
+          <i class="fa fa-tree"></i>
+        </span>
+        Another Page
+        <span class="badge badge-danger">
+          9
+        </span>
+      </a>
+    </li>
+    <li *ngIf="configFn.isScreen('xs') || configFn.isScreen('sm')">
+      <a (click)="logout()">
+        <span class="icon">
+          <i class="fa fa-sign-out"></i>
+        </span>
+        Logout
+      </a>
+    </li>-->
+  </ul>
+  <!--<h5 class="sidebar-nav-title">Labels <a class="action-link" href="#"><i class="glyphicon glyphicon-plus"></i></a></h5>-->
+  <!-- some styled links in sidebar. ready to use as links to email folders, projects, groups, etc -->
+
+</div>

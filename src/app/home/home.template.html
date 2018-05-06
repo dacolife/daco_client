@@ -1,0 +1,151 @@
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Главная</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+
+  <div class="col-lg-3 col-md-6">
+    <stats number="{{counts.Members}}" colour="bg-primary" type="fa-globe" comments="Делегаты"></stats>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <stats number="{{counts.Proposal}}" colour="bg-danger" type="fa-bell-o" comments="КАМПАНИИ ОЖИДАЮЩИЕ ВЕРИФИКАЦИИ"></stats>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <stats number="{{counts.CampaignKnown}}" colour="bg-success" type="fa-check" comments="ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ"></stats>
+  </div>
+
+  <div class="col-lg-3 col-md-6">
+    <stats number="{{counts.CampaignCompleted}}" colour="bg-warning" type="fa-coffee" comments="ЗАВЕРШЕННЫЕ КАМПАНИИ"></stats>
+  </div>
+
+
+
+</div>
+
+<br>
+
+<!--<div class="row">
+
+  <stats number="{{counts.Members}}" comments="ДЕЛЕГАТЫ" colour="primary" type="globe"
+         goto="dashboard.member"></stats>
+  <stats number="{{counts.Proposal}}" comments="КАМПАНИИ ОЖИДАЮЩИЕ ВЕРИФИКАЦИИ" colour="red" type="bell-o"
+         goto="dashboard.proposal"></stats>
+  <stats number="{{counts.CampaignKnown}}" comments="ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ" colour="green" type="check"
+         goto="dashboard.campaignKnown"></stats>
+  <stats number="{{counts.CampaignCompleted}}" comments="ЗАВЕРШЕННЫЕ КАМПАНИИ" colour="yellow" type="coffee"
+         goto="dashboard.campaignCompleted"></stats>
+
+</div>-->
+
+<div class="row">
+  <div class="col-lg-12">
+    <!--<div class="panel panel-default">-->
+    <!--<div class="panel-heading">
+        Здесь Вы можете узнать более подробную информацию о кампаниях
+    </div>-->
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+      <p>Здесь Вы можете узнать более подробную информацию о кампаниях</p>
+
+      <input type="text" id="txt"
+             ng-model="FromUser"
+             value=""
+             placeholder=" Введите адрес делегата"
+             ng-keyup="inputSubmit(FromUser)"
+             style="   width: 45%;
+                                 outline: none;
+                                 background: #fff;
+                                 border-radius: 25px;
+                                 border: 1px solid #a8a8a8;
+                                 margin: 5px 10px 5px 0;
+                                 padding: 6px;
+                                 vertical-align: middle;" />
+      <button type="submit" id="send" class="btn btn-group-sm btn-primary" ng-click="checkAddress(FromUser)"
+              style="border-radius: 30px;
+                                outline: none;
+                                padding: 6px 12px;
+                                margin: 5px 0;
+                                ">
+        Поиск
+      </button>
+
+      <div class="row"
+           style="margin-top: 15px">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th width="10%">Статус</th>
+                      <th width="10%">Имя</th>
+                      <th width="17%">Ссылка участника</th>
+                      <th width="15%">Дата регистрации</th>
+                      <th width="23%">Верифицированные кампании</th>
+                      <th width="20%">Завершенные кампании</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <!--<td>{{info.status}}</td>
+                      <td>{{info.name}}</td>
+                      <td><a href="{{info.link}}" target="_blank" title="{{info.link}}">{{info.link}}</a></td>
+                      <td>{{info.memmberSince}}</td>
+                      <td>{{info.campaignNew}}</td>
+                      <td>{{info.campaignCompleted}}</td>-->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" style="color: #ff1400">
+  <p>*Такого адреса делегата нет в нашей базе. Введите другой адрес.</p>
+</div>
+<!--
+    /.panel
+   <div class="row">
+       <div class="col-lg-8">
+           <div class="panel panel-default">
+               <div class="panel-heading">
+                   <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
+               </div>
+                /.panel-heading
+               <timeline></timeline>
+                /.panel-body
+           </div>
+            /.panel
+       </div>
+        /.col-lg-8
+       <div class="col-lg-4">
+           <div class="panel panel-default">
+               <div class="panel-heading">
+                   <i class="fa fa-bell fa-fw"></i> Notifications Panel
+               </div>
+                /.panel-heading
+               <notifications></notifications>
+                /.panel-body
+           </div>
+            /.panel
+
+           <chat></chat>
+             /.panel .chat-panel
+       </div>
+        /.col-lg-4
+   </div>
+    /.row
+  -->
