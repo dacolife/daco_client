@@ -74,7 +74,7 @@ export class HomeComponent {
         this.ERC223Coin = MetaCoinAbstraction;
       });
 
-    count
+    //count
 
    
 

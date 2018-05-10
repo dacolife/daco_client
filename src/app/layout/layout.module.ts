@@ -15,8 +15,7 @@ import { ChatMessageComponent } from './chat-sidebar/chat-message/chat-message.c
 import { SearchPipe } from './pipes/search.pipe';
 import { NotificationsLoadDirective } from './notifications/notifications-load.directive';
 import { NotificationsComponent } from './notifications/notifications.component';
-//import { StatsComponent } from './stats/stats.component';
-//import { StatsComponent } from '../shared/components/stats/stats.component';
+
 
 
 
@@ -32,8 +31,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     ROUTES,
     FormsModule,
     LoadingBarRouterModule
-  //  StatsComponent
-    
+
   ],
 
   declarations: [
@@ -45,8 +43,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     NotificationsComponent,
     NotificationsLoadDirective,
     ChatMessageComponent
-    //,   StatsComponent
-    
+  
   ]
 })
 export class LayoutModule {

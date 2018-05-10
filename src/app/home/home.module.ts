@@ -23,7 +23,6 @@ export const routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), WidgetModule
     , UtilModule, StatsModule
-
   ],
   declarations: [HomeComponent     ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA ]

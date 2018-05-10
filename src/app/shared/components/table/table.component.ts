@@ -1,6 +1,12 @@
+import {  OnInit, Input } from '@angular/core';
+
+
+
+
+
 import { Component } from '@angular/core';
-import { Web3Service } from '../util/web3.service';
-import { DacoService } from '../util/daco.sevice';
+import { Web3Service } from '../../../util/web3.service';
+import { DacoService } from '../../../util/daco.sevice';
 import { count } from 'rxjs/operator/count';
 import { tableData } from './tables-dynamic.data';
 declare let jQuery: any;
@@ -10,28 +16,8 @@ declare let jQuery: any;
 
 declare let require: any;
 
-const metacoin_artifacts = require('../../../build/contracts/DACOMain.json');
+const metacoin_artifacts = require('../../../../../build/contracts/DACOMain.json');
 
-export class StatsViewModel {
-
-  public number: number = 0;
-  public colour: string = 'primary';
-  public type: string = 'fa-bell-o';
-  public comments: string = 'Delegates';
-
-
-}
-
-
-export class Counts {
-
-  public Members: number = 0;
-  public Proposal: number = 0;
-  public CampaignKnown: number = 0;
-  public CampaignCompleted: number = 0;
-  public CampaignAll: number = 0;
-
-}
 
 
 const PEOPLE = [
@@ -301,10 +287,10 @@ const PEOPLE = [
 ];
 
 @Component({
-  selector: 'app-member',
-  templateUrl: './member.template.html'
+  selector: 'dacotable',
+  templateUrl: './table.component.html'
 })
-export class MemberComponent {
+export class TableComponent {
 
   data: any[] = PEOPLE;
   searchText: string = '';
@@ -330,19 +316,19 @@ export class MemberComponent {
   //  "Dima"
   //status
   //  :
-   // "Может голосовать""
+  // "Может голосовать""
 
   rows: Array<any> = [];
   columns: Array<any> = [
     { title: 'Статус', name: 'status', sort: false },
-    { title: 'Имя', name: 'name', sort: false},
-    { title: 'ССЫЛКА УЧАСТНИКА', name: 'link', sort: false},
+    { title: 'Имя', name: 'name', sort: false },
+    { title: 'ССЫЛКА УЧАСТНИКА', name: 'link', sort: false },
     { title: 'ДАТА РЕГИСТРАЦИИ', name: 'memmberSince', sort: false },
     { title: 'ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ', name: 'campaignCompleted', sort: false },
     { title: 'ЗАВЕРШЕННЫЕ КАМПАНИИ', name: 'campaignNew', sort: false }
-   
-  
- 
+
+
+
   ];
   page: number = 1;
   itemsPerPage: number = 10;
@@ -364,7 +350,7 @@ export class MemberComponent {
   ERC223Coin: any;
   members: any[] = [];
   isLoaded: boolean = false;
-  countsView: StatsViewModel[];
+  
 
   //model = {
   //  amount: 5,
@@ -385,11 +371,11 @@ export class MemberComponent {
     private web3Service: Web3Service
     , private dacoService: DacoService
   ) {
-    console.log('Constructor: ' + 'MemberComponent');
+    console.log('Constructor: ' + 'TableComponent');
     var ewr = metacoin_artifacts;
   }
 
-  ngOnInit(): void {
+  async ngOnInit()  {
     //console.log('OnInit: ' + this);
     //console.log(this);
     this.watchAccount();
@@ -397,21 +383,23 @@ export class MemberComponent {
       .then((MetaCoinAbstraction) => {
         this.ERC223Coin = MetaCoinAbstraction;
       });
-
     // this.refreshData();
+
     this.dacoService.setupDacoContract();
     this.refreshData();
-    if (this.dacoService.isLoaded)
-      this.refreshData();
-    else {
-  
+    //if (this.dacoService.isLoaded)
+    //  this.refreshData();
+    //else {
+
+
+ 
       this.dacoService.seriveceObservable.subscribe((test) => {
         alert(test);
         this.refreshData();
       });
-      this.dacoService.setupDacoContract();
+    
 
-    }
+   // }
 
     const searchInput = jQuery('#table-search-input, #search-countries');
     searchInput
@@ -440,7 +428,7 @@ export class MemberComponent {
 
 
   async  refreshData() {
-   
+
 
     try {
 
@@ -451,7 +439,7 @@ export class MemberComponent {
       this.onChangeTable(this.config);
 
 
-      
+
     } catch (e) {
       console.log(e);
       //this.setStatus('Error getting balance; see log.');
@@ -459,37 +447,7 @@ export class MemberComponent {
   }
 
 
-  //setStatus(status) {
-  //    this.status = status;
-  //}
-
-  //async sendCoin() {
-  //    if (!this.ERC223Coin) {
-  //        this.setStatus('Metacoin is not loaded, unable to send transaction');
-  //        return;
-  //    }
-
-  //    const amount = this.model.amount;
-  //    const receiver = this.model.receiver;
-
-  //    console.log('Sending coins' + amount + ' to ' + receiver);
-
-  //    this.setStatus('Initiating transaction... (please wait)');
-  //    try {
-  //        const deployedMetaCoin = await this.ERC223Coin.deployed();
-  //        const transaction = await deployedMetaCoin.sendCoin.sendTransaction(receiver, amount, { from: this.model.account });
-
-  //        if (!transaction) {
-  //            this.setStatus('Transaction failed!');
-  //        } else {
-  //            this.setStatus('Transaction complete!');
-  //        }
-  //    } catch (e) {
-  //        console.log(e);
-  //        this.setStatus('Error sending coin; see log.');
-  //    }
-  //}
-
+  
   changePage(page: any, data: Array<any> = this.ng2TableData): Array<any> {
     const start = (page.page - 1) * page.itemsPerPage;
     const end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
@@ -558,3 +516,5 @@ export class MemberComponent {
 
 
 }
+
+
