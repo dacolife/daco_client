@@ -379,24 +379,25 @@ export class TableComponent {
     //console.log('OnInit: ' + this);
     //console.log(this);
     this.watchAccount();
-    this.web3Service.artifactsToContract(metacoin_artifacts)
-      .then((MetaCoinAbstraction) => {
-        this.ERC223Coin = MetaCoinAbstraction;
-      });
+    //this.web3Service.artifactsToContract(metacoin_artifacts)
+    //  .then((MetaCoinAbstraction) => {
+    //    this.ERC223Coin = MetaCoinAbstraction;
+    //  });
     // this.refreshData();
 
-    this.dacoService.setupDacoContract();
-    this.refreshData();
+  
+    await this.dacoService.setupDacoContract();
+    await this.refreshData();
     //if (this.dacoService.isLoaded)
     //  this.refreshData();
     //else {
 
 
  
-      this.dacoService.seriveceObservable.subscribe((test) => {
-        alert(test);
-        this.refreshData();
-      });
+      //this.dacoService.seriveceObservable.subscribe((test) => {
+      //  alert(test);
+      //  this.refreshData();
+      //});
     
 
    // }
@@ -417,8 +418,8 @@ export class TableComponent {
   }
 
   watchAccount() {
-    this.dacoService.accountsObservable.subscribe((accounts) => {
-      this.accounts = accounts;
+    this.dacoService.seriveceObservable.subscribe((test) => {
+      //this.accounts = accounts;
       //this.model.account = accounts[0];
       this.refreshData();
       this.isLoaded = true;

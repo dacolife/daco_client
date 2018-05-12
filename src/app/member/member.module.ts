@@ -39,10 +39,6 @@ export const routes = [
   declarations: [
     MemberComponent
   ],
-  providers: [
-    Web3Service,
-    DacoService
-  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class MemberModule {

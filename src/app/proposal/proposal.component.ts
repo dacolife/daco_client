@@ -382,8 +382,8 @@ export class ProposalComponent {
 
 
   constructor(
-    private web3Service: Web3Service
-    , private dacoService: DacoService
+   
+     private dacoService: DacoService
   ) {
     console.log('Constructor: ' + 'ProposalComponent');
     var ewr = metacoin_artifacts;
@@ -393,10 +393,10 @@ export class ProposalComponent {
     //console.log('OnInit: ' + this);
     //console.log(this);
     this.watchAccount();
-    this.web3Service.artifactsToContract(metacoin_artifacts)
-      .then((MetaCoinAbstraction) => {
-        this.ERC223Coin = MetaCoinAbstraction;
-      });
+    //this.web3Service.artifactsToContract(metacoin_artifacts)
+    //  .then((MetaCoinAbstraction) => {
+    //    this.ERC223Coin = MetaCoinAbstraction;
+    //  });
 
 
     const searchInput = jQuery('#table-search-input, #search-countries');

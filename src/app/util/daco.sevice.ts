@@ -17,6 +17,7 @@ const daco_artifacts = require('../../../build/contracts/DACOMain.json');
 
 
 
+
 declare let window: any;
 
 @Injectable()
@@ -25,7 +26,7 @@ export class DacoService {
   private web3: any;
   private accounts: string[];
   public ready = false;
-  public DacoContract: any;
+  public DacoInstance: any;
   public accountsObservable = new Subject<string[]>();
   public seriveceObservable = new Subject<string>();
   private deployedDaco = null;
@@ -52,18 +53,26 @@ export class DacoService {
     //this.setupDacoContract();
     //var ewr = daco_artifacts;
     // alert(1);
-
+    this.watchAccount();
+   
   };
 
 
 
   public async setupDacoContract() {
 
-    this.watchAccount();
-    this.DacoContract = await this.web3Service.artifactsToContract(daco_artifacts);
-    this.deployedDaco = await this.DacoContract.deployed();
-    this.isLoaded = true;
+    this.deployedDaco = await this.web3Service.DacoInstance.deployed();
+   // this.metaCoinInstance = await this.web3Service.MetaCoin.deployed();
+    //this.deployedDaco = await this.DacoInstance.deployed();
     this.seriveceObservable.next('6666');
+
+
+    this.isLoaded = true;
+
+  
+
+
+   
     //.then((DacoAbstraction) => {
     //  this.DacoContract = DacoAbstraction;
 
@@ -81,8 +90,10 @@ export class DacoService {
 
   watchAccount() {
     this.web3Service.accountsObservable.subscribe((accounts) => {
+  
+      // this.accountsObservable.next(accounts);
+      this.setupDacoContract();
      
-      this.accountsObservable.next(accounts);
     });
   }
 

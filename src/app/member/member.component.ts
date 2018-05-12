@@ -382,36 +382,35 @@ export class MemberComponent {
 
 
   constructor(
-    private web3Service: Web3Service
-    , private dacoService: DacoService
+   private dacoService: DacoService
   ) {
     console.log('Constructor: ' + 'MemberComponent');
     var ewr = metacoin_artifacts;
   }
 
-  ngOnInit(): void {
+  async ngOnInit()  {
     //console.log('OnInit: ' + this);
     //console.log(this);
     this.watchAccount();
-    this.web3Service.artifactsToContract(metacoin_artifacts)
-      .then((MetaCoinAbstraction) => {
-        this.ERC223Coin = MetaCoinAbstraction;
-      });
+    //this.web3Service.artifactsToContract(metacoin_artifacts)
+    //  .then((MetaCoinAbstraction) => {
+    //    this.ERC223Coin = MetaCoinAbstraction;
+    //  });
 
     // this.refreshData();
-    this.dacoService.setupDacoContract();
-    this.refreshData();
-    if (this.dacoService.isLoaded)
-      this.refreshData();
-    else {
+    await this.dacoService.setupDacoContract();
+    await  this.refreshData();
+    //if (this.dacoService.isLoaded)
+    //  this.refreshData();
+    //else {
   
-      this.dacoService.seriveceObservable.subscribe((test) => {
-        alert(test);
-        this.refreshData();
-      });
-      this.dacoService.setupDacoContract();
+    //  this.dacoService.seriveceObservable.subscribe((test) => {
+    //    alert(test);
+    //    this.refreshData();
+    //  });
+    //  this.dacoService.setupDacoContract();
 
-    }
+   // }
 
     const searchInput = jQuery('#table-search-input, #search-countries');
     searchInput

@@ -65,14 +65,17 @@ export class HomeComponent {
     var ewr = metacoin_artifacts;
   }
 
-  ngOnInit(): void {
+ async ngOnInit()  {
     //console.log('OnInit: ' + this);
     //console.log(this);
     this.watchAccount();
-    this.web3Service.artifactsToContract(metacoin_artifacts)
-      .then((MetaCoinAbstraction) => {
-        this.ERC223Coin = MetaCoinAbstraction;
-      });
+    await this.dacoService.setupDacoContract();
+    await this.refreshData();
+
+    //this.web3Service.artifactsToContract(metacoin_artifacts)
+    //  .then((MetaCoinAbstraction) => {
+    //    this.ERC223Coin = MetaCoinAbstraction;
+    //  });
 
     //count
 
@@ -86,7 +89,6 @@ export class HomeComponent {
       //this.model.account = accounts[0];
       this.refreshData();
       this.isLoaded = true;
-
     });
   }
 
