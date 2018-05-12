@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { Web3Service } from '../../../util/web3.service';
 import { DacoService } from '../../../util/daco.sevice';
 import { count } from 'rxjs/operator/count';
-import { tableData } from './tables-dynamic.data';
+
 declare let jQuery: any;
 
 
@@ -20,316 +20,25 @@ const metacoin_artifacts = require('../../../../../build/contracts/DACOMain.json
 
 
 
-const PEOPLE = [
-  {
-    'id': '1',
-    'name': 'Algerd',
-    'info': {
-      'type': 'JPEG',
-      'dimensions': '200x150'
-    },
-    'description': 'Palo Alto',
-    'date': 'June 27, 2013',
-    'status': {
-      'progress': '29%',
-      'type': 'success'
-    }
-  },
-  {
-    'id': '2',
-    'name': 'Vitaut',
-    'info': {
-      'type': 'PNG',
-      'dimensions': '6433x4522'
-    },
-    'description': 'Vilnia',
-    'date': 'January 1, 1442',
-    'status': {
-      'progress': '19%',
-      'type': 'danger'
-    }
-  },
-  {
-    'id': '3',
-    'name': 'Honar',
-    'info': {
-      'type': 'AVI',
-      'dimensions': '1440x980'
-    },
-    'description': 'Berlin',
-    'date': 'August 6, 2013',
-    'status': {
-      'progress': '49%',
-      'type': 'bar-gray-light'
-    }
-  },
-  {
-    'id': '4',
-    'name': 'Jack',
-    'info': {
-      'type': 'PNG',
-      'dimensions': '12x43'
-    },
-    'description': 'San Francisco',
-    'date': 'August 19, 2013',
-    'status': {
-      'progress': '69%'
-    }
-  },
-  {
-    'id': '5',
-    'name': 'Leon',
-    'info': {
-      'type': 'MP4',
-      'dimensions': '800x480'
-    },
-    'description': 'Brasilia',
-    'date': 'October 1, 2013',
-    'status': {
-      'progress': '9%',
-      'type': 'bar-gray-light'
-    }
-  },
-  {
-    'id': '6',
-    'name': 'Max',
-    'info': {
-      'type': 'TXT',
-      'dimensions': '-'
-    },
-    'description': 'Helsinki',
-    'date': 'October 29, 2013',
-    'status': {
-      'progress': '38%',
-      'type': 'warning'
-    }
-  },
-  {
-    'id': '7',
-    'name': 'Pol',
-    'info': {
-      'type': 'MOV',
-      'dimensions': '640x480'
-    },
-    'description': 'Radashkovichi',
-    'date': 'November 11, 2013',
-    'status': {
-      'progress': '83%',
-      'type': 'danger'
-    }
-  },
-  {
-    'id': '8',
-    'name': 'Chrishna',
-    'info': {
-      'type': 'DOC',
-      'dimensions': '-'
-    },
-    'description': 'Mumbai',
-    'date': 'December 2, 2013',
-    'status': {
-      'progress': '40%',
-      'type': 'info'
-    }
-  },
-  {
-    'id': '9',
-    'name': 'Leslie',
-    'info': {
-      'type': 'AVI',
-      'dimensions': '4820x2140'
-    },
-    'description': 'Singapore',
-    'date': 'December 6, 2013',
-    'status': {
-      'progress': '18%',
-      'type': 'warning'
-    }
-  },
-  {
-    'id': '10',
-    'name': 'David',
-    'info': {
-      'type': 'XML',
-      'dimensions': '-'
-    },
-    'description': 'Portland',
-    'date': 'December 13, 2013',
-    'status': {
-      'progress': '54%',
-      'type': 'bar-gray-light'
-    }
-  },
-  {
-    'id': '11',
-    'name': 'Andrej',
-    'info': {
-      'type': 'VOB',
-      'dimensions': '6433x4522'
-    },
-    'description': 'Minsk',
-    'date': 'December 14, 2013',
-    'status': {
-      'progress': '25%'
-    }
-  },
-  {
-    'id': '12',
-    'name': 'Julia',
-    'info': {
-      'type': 'JPEG',
-      'dimensions': '40x40'
-    },
-    'description': 'Hrodna',
-    'date': 'July 9, 2012',
-    'status': {
-      'progress': '50%',
-      'type': 'warning'
-    }
-  },
-  {
-    'id': '13',
-    'name': 'Ihnat',
-    'info': {
-      'type': 'JAVA',
-      'dimensions': '-'
-    },
-    'description': 'Los Angeles',
-    'date': 'August 2, 2012',
-    'status': {
-      'progress': '8%',
-      'type': 'success'
-    }
-  },
-  {
-    'id': '14',
-    'name': 'Abraham',
-    'info': {
-      'type': 'DOCX',
-      'dimensions': '-'
-    },
-    'description': 'Panama',
-    'date': 'September 3, 2012',
-    'status': {
-      'progress': '80%',
-      'type': 'bar-gray-light'
-    }
-  },
-  {
-    'id': '15',
-    'name': 'Tomas',
-    'info': {
-      'type': 'JPEG',
-      'dimensions': '1800x1420'
-    },
-    'description': 'Amsterdam',
-    'date': 'November 13, 2012',
-    'status': {
-      'progress': '10%',
-      'type': 'bar-gray-light'
-    }
-  },
-  {
-    'id': '16',
-    'name': 'Scott',
-    'info': {
-      'type': 'PNG',
-      'dimensions': '240x460'
-    },
-    'description': 'Sluck',
-    'date': 'December 5, 2012',
-    'status': {
-      'progress': '93%'
-    }
-  },
-  {
-    'id': '17',
-    'name': 'Pham',
-    'info': {
-      'type': 'MAIL',
-      'dimensions': '-'
-    },
-    'description': 'Tokyo',
-    'date': 'December 8, 2012',
-    'status': {
-      'progress': '44%',
-      'type': 'danger'
-    }
-  },
-  {
-    'id': '18',
-    'name': 'Peter',
-    'info': {
-      'type': 'PNG',
-      'dimensions': '8320x6400'
-    },
-    'description': 'Cape Town',
-    'date': 'December 29, 2012',
-    'status': {
-      'progress': '5%',
-      'type': 'bar-gray-light'
-    }
-  },
-  {
-    'id': '19',
-    'name': 'Uladz',
-    'info': {
-      'type': 'JPEG',
-      'dimensions': '2200x1600'
-    },
-    'description': 'Mahileu',
-    'date': 'December 7, 2013',
-    'status': {
-      'progress': '0%',
-      'type': 'gray-light'
-    }
-  }
-];
-
 @Component({
   selector: 'dacotable',
   templateUrl: './table.component.html'
 })
 export class TableComponent {
 
-  data: any[] = PEOPLE;
+
+  @Input() ng2TableData: Array<any>;
+  @Input() columns: Array<any> ;
+
+
+
+
   searchText: string = '';
 
 
-  //"campaignCompleted
-  //  :
-  //  3
-  //campaignNew
-  //  :
-  //  9
-  //link
-  //  :
-  //  ""
-  //memmberSince
-  //  :
-  //  "25.03.2018, 23:40:17"
-  //memmberSince1
-  //  :
-  //  1522010417
-  //name
-  //  :
-  //  "Dima"
-  //status
-  //  :
-  // "Может голосовать""
 
   rows: Array<any> = [];
-  columns: Array<any> = [
-    { title: 'Статус', name: 'status', sort: false },
-    { title: 'Имя', name: 'name', sort: false },
-    { title: 'ССЫЛКА УЧАСТНИКА', name: 'link', sort: false },
-    { title: 'ДАТА РЕГИСТРАЦИИ', name: 'memmberSince', sort: false },
-    { title: 'ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ', name: 'campaignCompleted', sort: false },
-    { title: 'ЗАВЕРШЕННЫЕ КАМПАНИИ', name: 'campaignNew', sort: false }
 
-
-
-  ];
   page: number = 1;
   itemsPerPage: number = 10;
   maxSize: number = 5;
@@ -342,23 +51,16 @@ export class TableComponent {
     //filtering: { filterString: '', columnName: 'status' }
   };
 
-  ng2TableData: Array<any> = tableData;
+  //ng2TableData: Array<any> ;
 
 
 
   accounts: string[];
   ERC223Coin: any;
-  members: any[] = [];
+
   isLoaded: boolean = false;
   
 
-  //model = {
-  //  amount: 5,
-  //  receiver: '',
-  //  balance: 0,
-  //  account: '',
-  //  decimals: 0
-  //};
 
   private counts: any[] = [];
 
@@ -375,32 +77,12 @@ export class TableComponent {
     var ewr = metacoin_artifacts;
   }
 
-  async ngOnInit()  {
-    //console.log('OnInit: ' + this);
-    //console.log(this);
-    this.watchAccount();
-    //this.web3Service.artifactsToContract(metacoin_artifacts)
-    //  .then((MetaCoinAbstraction) => {
-    //    this.ERC223Coin = MetaCoinAbstraction;
-    //  });
-    // this.refreshData();
+   ngOnInit()  {
 
-  
-    await this.dacoService.setupDacoContract();
-    await this.refreshData();
-    //if (this.dacoService.isLoaded)
-    //  this.refreshData();
-    //else {
-
-
+    //this.watchAccount();
+    //await this.dacoService.setupDacoContract();
+    //await this.refreshData();
  
-      //this.dacoService.seriveceObservable.subscribe((test) => {
-      //  alert(test);
-      //  this.refreshData();
-      //});
-    
-
-   // }
 
     const searchInput = jQuery('#table-search-input, #search-countries');
     searchInput
@@ -418,25 +100,26 @@ export class TableComponent {
   }
 
   watchAccount() {
-    this.dacoService.seriveceObservable.subscribe((test) => {
-      //this.accounts = accounts;
-      //this.model.account = accounts[0];
-      this.refreshData();
-      this.isLoaded = true;
+    //this.dacoService.seriveceObservable.subscribe((test) => {
+    //  //this.accounts = accounts;
+    //  //this.model.account = accounts[0];
+    //  this.refreshData();
+    //  this.isLoaded = true;
 
-    });
+    //});
   }
 
 
-  async  refreshData() {
+  public refreshData(members: any[]) {
 
 
     try {
 
 
-      this.members = await this.dacoService.getMembers();
-      console.log('Refreshing data');
-      this.ng2TableData = this.members;
+      //this.tableData = await this.dacoService.getMembers();
+      //console.log('Refreshing data');
+      //this.ng2TableData = this.tableData;
+      this.ng2TableData = members;
       this.onChangeTable(this.config);
 
 
