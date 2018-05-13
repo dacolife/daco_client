@@ -9,9 +9,6 @@ declare let jQuery: any;
 import { TableComponent } from '../shared/components/table/table.component';
 
 
-declare let require: any;
-
-const metacoin_artifacts = require('../../../build/contracts/DACOMain.json');
 
 export class StatsViewModel {
 
@@ -49,16 +46,15 @@ export class ProposalComponent {
 
   searchText: string = '';
 
-    columns: Array<any> = [
-    { title: 'Статус', name: 'status', sort: false },
-    { title: 'Имя', name: 'name', sort: false },
-    { title: 'ССЫЛКА УЧАСТНИКА', name: 'link', sort: false },
-    { title: 'ДАТА РЕГИСТРАЦИИ', name: 'memmberSince', sort: false },
-    { title: 'ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ', name: 'campaignCompleted', sort: false },
-    { title: 'ЗАВЕРШЕННЫЕ КАМПАНИИ', name: 'campaignNew', sort: false }
 
-
-
+  columns: Array<any> = [
+    { title: 'Заявитель', name: 'addressOwner', sort: false },
+    { title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
+    { title: 'Сумма', name: 'amount', sort: false },
+    { title: 'Описание заявки', name: 'description', sort: false },
+    { title: 'Ссылка', name: 'link', sort: false },
+    { title: 'Дата заявки', name: 'applySince', sort: false },
+    { title: 'Количество голосов', name: 'numberOfVotes', sort: false }
   ];
   page: number = 1;
   itemsPerPage: number = 10;
@@ -86,20 +82,20 @@ export class ProposalComponent {
 
 
   constructor(
-   
-     private dacoService: DacoService
+
+    private dacoService: DacoService
   ) {
     console.log('Constructor: ' + 'ProposalComponent');
-    var ewr = metacoin_artifacts;
+
   }
 
-  async ngOnInit()  {
+  async ngOnInit() {
 
-  await this.dacoService.setupDacoContract();
-  await this.refreshData();
+    await this.dacoService.setupDacoContract();
+    await this.refreshData();
 
 
-}
+  }
 
   watchAccount() {
     this.dacoService.accountsObservable.subscribe((accounts) => {
@@ -118,10 +114,10 @@ export class ProposalComponent {
     try {
 
 
-      this.members = await this.dacoService.getMembers();
+      this.members = await this.dacoService.getProposals();
       this.tableComponent.refreshData(this.members);
       console.log('Refreshing data');
-  
+
 
     } catch (e) {
       console.log(e);
@@ -131,11 +127,11 @@ export class ProposalComponent {
 
 
 
- 
 
- 
 
- 
+
+
+
 
 
 

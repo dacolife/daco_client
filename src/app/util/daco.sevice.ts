@@ -45,7 +45,7 @@ export class DacoService {
   };
   status = '';
 
-  
+
 
 
   constructor(private web3Service: Web3Service) {
@@ -54,7 +54,7 @@ export class DacoService {
     //var ewr = daco_artifacts;
     // alert(1);
     this.watchAccount();
-   
+
   };
 
 
@@ -62,17 +62,17 @@ export class DacoService {
   public async setupDacoContract() {
 
     this.deployedDaco = await this.web3Service.DacoInstance.deployed();
-   // this.metaCoinInstance = await this.web3Service.MetaCoin.deployed();
+    // this.metaCoinInstance = await this.web3Service.MetaCoin.deployed();
     //this.deployedDaco = await this.DacoInstance.deployed();
     this.seriveceObservable.next('6666');
 
 
     this.isLoaded = true;
 
-  
 
 
-   
+
+
     //.then((DacoAbstraction) => {
     //  this.DacoContract = DacoAbstraction;
 
@@ -90,10 +90,10 @@ export class DacoService {
 
   watchAccount() {
     this.web3Service.accountsObservable.subscribe((accounts) => {
-  
+
       // this.accountsObservable.next(accounts);
       this.setupDacoContract();
-     
+
     });
   }
 
@@ -200,13 +200,13 @@ export class DacoService {
 
 
       var numMembers = await this.deployedDaco.numMembers();//узнать число участников
-     var  members: any[] = []; 
+      var members: any[] = [];
       for (var i = 0; i < numMembers.c[0]; i++) {
         var address = await this.deployedDaco.membersAddr(i); //узнать адрес по номеру участника
- 
+
         var data = await this.deployedDaco.getMember(address); //узнать инфу участника по адресу
         //this.deployedDaco.getMember(address, function (error, data) {//узнать инфу участника по адресу
-        
+
         members.push({
           status: data[0] ? "Может голосовать" : "Не голосует",
           name: data[2],
@@ -218,10 +218,210 @@ export class DacoService {
           campaignCompleted: data[6].c[0]
         });
 
-      
+
       };
 
       return members;
+
+
+    } catch (e) {
+      console.log(e);
+      //this.setStatus('Error getting balance; see log.');
+    }
+
+
+  }
+
+
+
+  async getProposals() {
+
+    try {
+
+
+      var numProposals = await this.deployedDaco.numProposals();//узнать число участников
+      var items: any[] = [];
+      for (var i = 0; i < numProposals.c[0]; i++) {
+        var address = await this.deployedDaco.proposalsAddr(i); //узнать адрес по номеру участника
+
+
+        var dat = await this.deployedDaco.getCampaignCommonInfo(address); //узнать инфу участника по адресу
+        var data = await this.deployedDaco.getCampaignProposalInfo(address); //узнать инфу участника по адресу
+
+
+
+        items.push({
+          addressOwner: dat[3],
+          addressWallet: dat[4],
+          amount: dat[5].c[0],
+          description: dat[6],
+          link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
+          // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
+          applySince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+          applySinceForCompare: +data[4].c[0],
+          numberOfVotes: data[3].c[0],
+          number: i
+
+        });
+
+
+      };
+
+      return items;
+
+
+    } catch (e) {
+      console.log(e);
+      //this.setStatus('Error getting balance; see log.');
+    }
+
+
+  }
+
+  async getСampaignKnown() {
+
+    try {
+
+      //dacoMainService.numCampaigns(function (error, data) {//кол-во предложений
+      //  $scope.countsCampaign = data.c[0];
+      //  for (var i = 0; i < $scope.countsCampaign; i++) {
+      //    (function (i) {
+      //      dacoMainService.campaignsAddr(i, function (error, data) {//адрес заявки/кашелька из порядкового номера
+      //        var datta = data;
+      //        dacoMainService.getCampaignCommonInfo(datta, function (error, data) {//инфа общая
+      //          var dat = data;
+      //          dacoMainService.getCampaignActiveInfo(datta, function (error, data) {//инфа заявки
+      //            $scope.items.push({
+      //              addressOwner: dat[3],
+      //              addressWallet: dat[4],
+      //              amount: dat[5].c[0],
+      //              description: dat[6],
+      //              number: i,
+      //              link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
+      //              // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
+      //              proposalSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+      //              proposalSinceForCompare: +data[4].c[0],
+      //              campaignSince: data[5].c[0] ? new Date(data[5].c[0] * 1000).toLocaleString("ru") : "Неизвестна"
+      //            });
+
+      //            function compareDate(dateA, dateB) {
+      //              return dateA.proposalSinceForCompare - dateB.proposalSinceForCompare;
+      //            }
+      //            $scope.items.sort(compareDate);
+      //            $scope.$apply();
+      //          });
+      //          $scope.$apply();
+      //        });
+      //      });
+      //    })(i);
+      //  }
+      //});
+
+
+
+      var numProposals = await this.deployedDaco.numCampaigns();//узнать число участников
+      var items: any[] = [];
+      for (var i = 0; i < numProposals.c[0]; i++) {
+        var address = await this.deployedDaco.campaignsAddr(i); //узнать адрес по номеру участника
+
+
+        var dat = await this.deployedDaco.getCampaignCommonInfo(address); //узнать инфу участника по адресу
+        var data = await this.deployedDaco.getCampaignActiveInfo(address); //узнать инфу участника по адресу
+
+
+
+        items.push({
+          addressOwner: dat[3],
+          addressWallet: dat[4],
+          amount: dat[5].c[0],
+          description: dat[6],
+          number: i,
+          link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
+          // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
+          proposalSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+          proposalSinceForCompare: +data[4].c[0],
+          campaignSince: data[5].c[0] ? new Date(data[5].c[0] * 1000).toLocaleString("ru") : "Неизвестна"
+        });
+      };
+
+      return items;
+
+
+    } catch (e) {
+      console.log(e);
+      //this.setStatus('Error getting balance; see log.');
+    }
+
+
+  }
+
+  async getСampaignCompleted() {
+
+    try {
+
+      //dacoMainService.numCampaigns(function (error, data) {//кол-во предложений
+      //  $scope.countsCampaign = data.c[0];
+      //  for (var i = 0; i < $scope.countsCampaign; i++) {
+      //    (function (i) {
+      //      dacoMainService.campaignsAddr(i, function (error, data) {//адрес заявки/кашелька из порядкового номера
+      //        var datta = data;
+      //        dacoMainService.getCampaignCommonInfo(datta, function (error, data) {//инфа общая
+      //          var dat = data;
+      //          dacoMainService.getCampaignActiveInfo(datta, function (error, data) {//инфа заявки
+      //            $scope.items.push({
+      //              addressOwner: dat[3],
+      //              addressWallet: dat[4],
+      //              amount: dat[5].c[0],
+      //              description: dat[6],
+      //              number: i,
+      //              link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
+      //              // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
+      //              proposalSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+      //              proposalSinceForCompare: +data[4].c[0],
+      //              campaignSince: data[5].c[0] ? new Date(data[5].c[0] * 1000).toLocaleString("ru") : "Неизвестна"
+      //            });
+
+      //            function compareDate(dateA, dateB) {
+      //              return dateA.proposalSinceForCompare - dateB.proposalSinceForCompare;
+      //            }
+      //            $scope.items.sort(compareDate);
+      //            $scope.$apply();
+      //          });
+      //          $scope.$apply();
+      //        });
+      //      });
+      //    })(i);
+      //  }
+      //});
+
+
+
+      var numProposals = await this.deployedDaco.numFinishedCampaigns();//узнать число участников
+      var items: any[] = [];
+      for (var i = 0; i < numProposals.c[0]; i++) {
+        var address = await this.deployedDaco.finishedCampaignsAddr(i); //узнать адрес по номеру участника
+
+
+        var dat = await this.deployedDaco.getCampaignCommonInfo(address); //узнать инфу участника по адресу
+        var data = await this.deployedDaco.getCampaignFinishedInfo(address); //узнать инфу участника по адресу
+
+
+
+        items.push({
+          addressOwner: dat[3],
+          addressWallet: dat[4],
+          amount: dat[5].c[0],
+          description: dat[6],
+          number: +i,
+          link: data[0] ? data[0].slice(0, 4) == "http" ? data[0] : "http://" + data[0] : data[0],
+          // link: data[0].indexOf("http://")<0||data[0].indexOf("https://")<0 ?  data[0] :"http://"+data[0],
+          campaignSince: data[2].c[0] ? new Date(data[2].c[0] * 1000).toLocaleString("ru") : "Неизвестна",
+          campaignUntil: data[3].c[0] ? new Date(data[3].c[0] * 1000).toLocaleString("ru") : "Неизвестна",
+          finishedAmount: data[4].c[0] ? data[4].c[0] : "Неизвестно"
+        });
+      };
+
+      return items;
 
 
     } catch (e) {
