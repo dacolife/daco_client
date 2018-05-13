@@ -9,7 +9,9 @@ const routes: Routes = [
     { path: 'proposal', loadChildren: '../proposal/proposal.module#ProposalModule' },
     { path: 'campaignKnown', loadChildren: '../campaign-known/campaign-known.module#CampaignKnownModule' },
     { path: 'campaignCompleted', loadChildren: '../campaign-completed/campaign-completed.module#CampaignCompletedModule' },
-    { path: 'faq', loadChildren: '../faq/faq.module#FaqModule' }
+    { path: 'application', loadChildren: '../application/application.module#ApplicationModule' },
+    { path: 'faq', loadChildren: '../faq/faq.module#FaqModule' },
+
     //{ path: 'another-page', loadChildren: '../another/another.module#AnotherModule' },
   ]}
 ];
