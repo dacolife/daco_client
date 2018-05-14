@@ -19,7 +19,7 @@ import { Subject } from 'rxjs/Subject';
 export class Web3Service {
 
   private web3: any;
-  private accounts: string[];
+  private accounts: any[];
   public DacoInstance: any;
 
   public accountsObservable = new Subject<string[]>();

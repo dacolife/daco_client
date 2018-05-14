@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Web3Service } from '../util/web3.service';
 import { DacoService } from '../util/daco.sevice';
 import { count } from 'rxjs/operator/count';
-import { tableData } from './tables-dynamic.data';
+
 declare let jQuery: any;
 
 
@@ -73,6 +73,11 @@ export class ApplicationComponent {
   isLoaded: boolean = false;
   countsView: StatsViewModel[];
 
+  addressWallet: any;
+  amountGoal: any;
+  descriptionOfCampaign: any;
+  linkOfCampaign: any;
+
 
   private counts: any[] = [];
 
@@ -85,14 +90,14 @@ export class ApplicationComponent {
 
     private dacoService: DacoService
   ) {
-    console.log('Constructor: ' + 'ProposalComponent');
+    console.log('Constructor: ' + ' Application');
 
   }
 
   async ngOnInit() {
 
     await this.dacoService.setupDacoContract();
-    await this.refreshData();
+
 
 
   }
@@ -123,6 +128,15 @@ export class ApplicationComponent {
       console.log(e);
       //this.setStatus('Error getting balance; see log.');
     }
+  }
+
+  async sendData() {
+
+   
+    var result = await this.dacoService.newProposal(this.addressWallet, this.amountGoal, this.descriptionOfCampaign, this.linkOfCampaign);
+
+   
+
   }
 
 

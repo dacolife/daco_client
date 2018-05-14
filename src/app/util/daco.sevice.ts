@@ -432,6 +432,23 @@ export class DacoService {
 
   }
 
+  async newProposal(addressWallet, amountGoal, descriptionOfCampaign, linkOfCampaign) {
 
+    try {
+
+
+      var items = await this.deployedDaco.newProposal(addressWallet, amountGoal, descriptionOfCampaign, linkOfCampaign,  { from: addressWallet });
+
+
+      return items;
+
+
+    } catch (e) {
+      console.log(e);
+
+    }
+
+
+  }
 
 }
