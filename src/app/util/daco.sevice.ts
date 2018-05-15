@@ -123,11 +123,11 @@ export class DacoService {
     try {
 
 
-      var metaCoinBalance = await this.deployedDaco.numMembers.call();
+      var num = await this.deployedDaco.numMembers();
       // const decimals = await deployedMetaCoin.decimals.call();
       //console.log('Found balance: ' + metaCoinBalance);
       //this.model.balance = metaCoinBalance;
-      return metaCoinBalance;
+      return num;
 
     } catch (e) {
       console.log(e);
@@ -141,11 +141,11 @@ export class DacoService {
     try {
 
 
-      var metaCoinBalance = await this.deployedDaco.numProposals.call();
+      var num = await this.deployedDaco.numProposals();
       // const decimals = await deployedMetaCoin.decimals.call();
       //console.log('Found balance: ' + metaCoinBalance);
       //this.model.balance = metaCoinBalance;
-      return metaCoinBalance;
+      return num;
 
     } catch (e) {
       console.log(e);
@@ -160,11 +160,11 @@ export class DacoService {
     try {
 
 
-      var metaCoinBalance = await this.deployedDaco.numCampaigns.call();
+      var num = await this.deployedDaco.numCampaigns();
       // const decimals = await deployedMetaCoin.decimals.call();
       //console.log('Found balance: ' + metaCoinBalance);
       //this.model.balance = metaCoinBalance;
-      return metaCoinBalance;
+      return num;
 
     } catch (e) {
       console.log(e);
@@ -178,11 +178,11 @@ export class DacoService {
 
     try {
 
-      var metaCoinBalance = await this.deployedDaco.numFinishedCampaigns.call();
+      var num = await this.deployedDaco.numFinishedCampaigns();
       // const decimals = await deployedMetaCoin.decimals.call();
       //console.log('Found balance: ' + metaCoinBalance);
       //this.model.balance = metaCoinBalance;
-      return metaCoinBalance;
+      return num;
 
     } catch (e) {
       console.log(e);
@@ -199,7 +199,7 @@ export class DacoService {
 
 
 
-      var numMembers = await this.deployedDaco.numMembers();//узнать число участников
+      var numMembers = await this.getNumMembers();//узнать число участников
       var members: any[] = [];
       for (var i = 0; i < numMembers.c[0]; i++) {
         var address = await this.deployedDaco.membersAddr(i); //узнать адрес по номеру участника
@@ -436,8 +436,15 @@ export class DacoService {
 
     try {
 
-
-      var items = await this.deployedDaco.newProposal(addressWallet, amountGoal, descriptionOfCampaign, linkOfCampaign,  { from: addressWallet });
+      var wallets = [];
+      wallets.push(addressWallet);
+      wallets.push(addressWallet);
+      var amounts = [];
+      amounts.push(amountGoal);
+      amounts.push(amountGoal + 1);
+      var enddate = 1526710599;
+      debugger;
+      var items = await this.deployedDaco.newProposal(wallets, amounts, enddate , descriptionOfCampaign, linkOfCampaign,  { from: addressWallet });
 
 
       return items;

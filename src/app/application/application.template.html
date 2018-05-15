@@ -63,37 +63,63 @@
             <div class="form-group row">
               <label for="normal-field" class="col-md-4  col-form-label text-md-right">Адрес кошелька для сбора средств</label>
               <div class="col-md-7 ">
-                <input type="text" id="normal-field" class="form-control"   [(ngModel)]="addressWallet" name="addressWallet" placeholder="Адрес кошелька для сбора средств">
+                <input type="text" id="normal-field" class="form-control" [(ngModel)]="addressWallet" name="addressWallet" placeholder="Адрес кошелька для сбора средств">
               </div>
             </div>
             <div class="form-group row">
               <label for="normal-field" class="col-md-4  col-form-label text-md-right">Сумма которую необходимо набрать</label>
               <div class="col-md-7 ">
-                <input type="text" id="normal-field" class="form-control"  [(ngModel)]="amountGoal" name="amountGoal"  placeholder="Сумма в ETH">
+                <input type="text" id="normal-field" class="form-control" [(ngModel)]="amountGoal" name="amountGoal" placeholder="Сумма в ETH">
               </div>
             </div>
             <div class="form-group row">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right"></label>
+              <div class="col-md-7 ">
+                <div class="form-group multiple-form-group" data-max="3">
+                  <label>Multiple inputs (with data-max=3)</label>
+
+                  <div class="form-group input-group">
+                    <input type="text" name="multiple[]" class="form-control">
+                    <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
+                  </div><div class="form-group input-group">
+                    <input type="text" name="multiple[]" class="form-control">
+                    <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
+                  </div><div class="form-group input-group">
+                    <input type="text" name="multiple[]" class="form-control">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-add" disabled="disabled">
+                        +
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group row">
               <label for="normal-field" class="col-md-4  col-form-label text-md-right">На что необходимы средства</label>
               <div class="col-md-7 ">
-                <input type="text" id="normal-field" class="form-control" [(ngModel)]="descriptionOfCampaign" name="descriptionOfCampaign"  placeholder="Немного информации о целях сбора средств">
+                <input type="text" id="normal-field" class="form-control" [(ngModel)]="descriptionOfCampaign" name="descriptionOfCampaign" placeholder="Немного информации о целях сбора средств">
               </div>
             </div>
             <div class="form-group row">
               <label for="normal-field" class="col-md-4  col-form-label text-md-right">Укажите ссылку</label>
               <div class="col-md-7 ">
-                <input type="text" id="normal-field" class="form-control" [(ngModel)]="linkOfCampaign" name="linkOfCampaign"  placeholder="Укажите ссылку">
+                <input type="text" id="normal-field" class="form-control" [(ngModel)]="linkOfCampaign" name="linkOfCampaign" placeholder="Укажите ссылку">
               </div>
             </div>
           </fieldset>
           <div class="form-actions">
             <div class="btn-block text-center">
               <button type="submit" (click)="sendData()" class="btn btn-primary">Создать</button>
-           
+
             </div>
           </div>
         </form>
       </div>
     </section>
   </div>
+
 
 </div>

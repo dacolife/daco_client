@@ -43,14 +43,6 @@ export class HomeComponent {
   isLoaded: boolean = false;
   countsView: StatsViewModel[] ;
 
-  //model = {
-  //  amount: 5,
-  //  receiver: '',
-  //  balance: 0,
-  //  account: '',
-  //  decimals: 0
-  //};
-
   counts: Counts = new Counts();
 
   status = '';
@@ -66,18 +58,12 @@ export class HomeComponent {
   }
 
  async ngOnInit()  {
-    //console.log('OnInit: ' + this);
-    //console.log(this);
+ 
     this.watchAccount();
     await this.dacoService.setupDacoContract();
     await this.refreshData();
 
-    //this.web3Service.artifactsToContract(metacoin_artifacts)
-    //  .then((MetaCoinAbstraction) => {
-    //    this.ERC223Coin = MetaCoinAbstraction;
-    //  });
 
-    //count
 
    
 
@@ -86,87 +72,22 @@ export class HomeComponent {
   watchAccount() {
     this.dacoService.accountsObservable.subscribe((accounts) => {
       this.accounts = accounts;
-      //this.model.account = accounts[0];
       this.refreshData();
-      this.isLoaded = true;
+
     });
   }
 
 
   async  refreshData() {
     console.log('Refreshing data');
+    this.counts.Members = await this.dacoService.getNumMembers();
+    this.counts.Proposal = await this.dacoService.getNumProposals();
+    this.counts.CampaignKnown = await this.dacoService.getNumCampaigns();
+    this.counts.CampaignCompleted = await this.dacoService.getNumFinishedCampaigns();
 
-    try {
-
-
-      //const deployedMetaCoin = await this.ERC223Coin.deployed();
-      //console.log(deployedMetaCoin);
-      //console.log('Account', this.model.account);
-      //const metaCoinBalance = await deployedMetaCoin.numCampaigns.call();
-
-      //dacoMainService.numMembers(function (error, data) {//узнать число участников
-      //  $scope.counts.members = +data;
-      //  $scope.$apply()
-      //});
-
-      //dacoMainService.numProposals(function (error, data) {//кол-во предложений
-      //  $scope.counts.proposal = +data;
-      //  $scope.$apply()
-      //});
-
-      //dacoMainService.numCampaigns(function (error, data) {//кол-во предложений
-      //  $scope.counts.campaignKnown = +data;
-      //  $scope.$apply()
-      //});
-
-      //dacoMainService.numFinishedCampaigns(function (error, data) {//кол-во завершенных кампаний
-      //  $scope.counts.campaignCompleted = +data;
-      //  $scope.$apply()
-      //});
-
-      const members = await this.dacoService.getNumMembers()
-      this.counts.Members = members.c[0];
-      this.counts.Proposal = await this.dacoService.getNumProposals();
-      this.counts.CampaignKnown = await this.dacoService.getNumCampaigns();
-      this.counts.CampaignCompleted = await this.dacoService.getNumFinishedCampaigns();
-     // this.model.campaignKnown = metaCoinBalance;
-    } catch (e) {
-      console.log(e);
-      //this.setStatus('Error getting balance; see log.');
-    }
   }
 
 
-  //setStatus(status) {
-  //    this.status = status;
-  //}
-
-  //async sendCoin() {
-  //    if (!this.ERC223Coin) {
-  //        this.setStatus('Metacoin is not loaded, unable to send transaction');
-  //        return;
-  //    }
-
-  //    const amount = this.model.amount;
-  //    const receiver = this.model.receiver;
-
-  //    console.log('Sending coins' + amount + ' to ' + receiver);
-
-  //    this.setStatus('Initiating transaction... (please wait)');
-  //    try {
-  //        const deployedMetaCoin = await this.ERC223Coin.deployed();
-  //        const transaction = await deployedMetaCoin.sendCoin.sendTransaction(receiver, amount, { from: this.model.account });
-
-  //        if (!transaction) {
-  //            this.setStatus('Transaction failed!');
-  //        } else {
-  //            this.setStatus('Transaction complete!');
-  //        }
-  //    } catch (e) {
-  //        console.log(e);
-  //        this.setStatus('Error sending coin; see log.');
-  //    }
-  //}
 
 
 
