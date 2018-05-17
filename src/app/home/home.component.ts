@@ -71,6 +71,7 @@ export class HomeComponent {
 
   watchAccount() {
     this.dacoService.accountsObservable.subscribe((accounts) => {
+      console.log("Home watch accounts");
       this.accounts = accounts;
       this.refreshData();
 

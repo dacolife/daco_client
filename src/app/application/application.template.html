@@ -48,7 +48,7 @@
     <section class="widget" widget>
       <header>
         <h6>
-          Inputs
+          
         </h6>
         <div class="widget-controls">
           <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
@@ -59,7 +59,7 @@
       <div class="widget-body">
         <form class="form-horizontal" role="form">
           <fieldset>
-            <legend><strong>Horizontal</strong> form</legend>
+            <legend>Заявка<strong> кампании</strong> </legend>
             <div class="form-group row">
               <label for="normal-field" class="col-md-4  col-form-label text-md-right">Адрес кошелька для сбора средств</label>
               <div class="col-md-7 ">
@@ -72,29 +72,29 @@
                 <input type="text" id="normal-field" class="form-control" [(ngModel)]="amountGoal" name="amountGoal" placeholder="Сумма в ETH">
               </div>
             </div>
-            <div class="form-group row">
-              <label for="normal-field" class="col-md-4  col-form-label text-md-right"></label>
-              <div class="col-md-7 ">
-                <div class="form-group multiple-form-group" data-max="3">
-                  <label>Multiple inputs (with data-max=3)</label>
+            <!--<div class="form-group row">
+      <label for="normal-field" class="col-md-4  col-form-label text-md-right"></label>
+      <div class="col-md-7 ">
+        <div class="form-group multiple-form-group" data-max="3">
+          <label>Multiple inputs (with data-max=3)</label>
 
-                  <div class="form-group input-group">
-                    <input type="text" name="multiple[]" class="form-control">
-                    <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
-                  </div><div class="form-group input-group">
-                    <input type="text" name="multiple[]" class="form-control">
-                    <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
-                  </div><div class="form-group input-group">
-                    <input type="text" name="multiple[]" class="form-control">
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-add" disabled="disabled">
-                        +
-                      </button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="form-group input-group">
+            <input type="text" name="multiple[]" class="form-control">
+            <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
+          </div><div class="form-group input-group">
+            <input type="text" name="multiple[]" class="form-control">
+            <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
+          </div><div class="form-group input-group">
+            <input type="text" name="multiple[]" class="form-control">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default btn-add" disabled="disabled">
+                +
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>-->
 
 
             <div class="form-group row">
@@ -110,12 +110,15 @@
               </div>
             </div>
           </fieldset>
+
           <div class="form-actions">
             <div class="btn-block text-center">
               <button type="submit" (click)="sendData()" class="btn btn-primary">Создать</button>
+              <button (click)="lookData()" [disabled]="!lookTransactionButton" type="submit" class="btn btn-primary">Следить</button>
 
             </div>
           </div>
+      
         </form>
       </div>
     </section>

@@ -29,7 +29,8 @@ export const routes = [
     PaginationModule.forRoot(),
     WidgetModule,
     Ng2TableModule,
-    TableModule
+    TableModule,
+    UtilModule
   ],
   declarations: [ApplicationComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA ]

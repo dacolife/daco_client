@@ -31,7 +31,7 @@ export class CampaignKnownComponent {
 
   columns: Array<any> = [
     { title: 'Заявитель', name: 'addressOwner', sort: false },
-    { title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
+    //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
     { title: 'Сумма', name: 'amount', sort: false },
     { title: 'Описание кампании', name: 'description', sort: false },
     { title: 'Ссылка', name: 'link', sort: false },

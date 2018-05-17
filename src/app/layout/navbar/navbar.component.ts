@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, ElementRef, Output } from '@angular/core';
 import { AppConfig } from '../../app.config';
+import { DacoService } from '../../util/daco.sevice';
 declare let jQuery: any;
 
 @Component({
@@ -11,8 +12,12 @@ export class NavbarComponent implements OnInit {
   @Output() toggleChatEvent: EventEmitter<any> = new EventEmitter();
   $el: any;
   config: any;
+  currentAccount: any ;
 
-  constructor(el: ElementRef, config: AppConfig) {
+  constructor(el: ElementRef, config: AppConfig,
+    private dacoService: DacoService,
+
+  ) {
     this.$el = jQuery(el.nativeElement);
     this.config = config.getConfig();
   }
@@ -24,6 +29,8 @@ export class NavbarComponent implements OnInit {
   toggleChat(): void {
     this.toggleChatEvent.emit(null);
   }
+
+
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -47,5 +54,16 @@ export class NavbarComponent implements OnInit {
       jQuery(this).parents('.input-group')
         [e.type === 'focus' ? 'addClass' : 'removeClass']('focus');
     });
+
+    this.watchAccount();
   }
+
+  watchAccount() {
+    this.dacoService.accountsObservable.subscribe((accounts) => {
+      this.currentAccount = accounts[0];
+
+      
+    });
+  }
+
 }

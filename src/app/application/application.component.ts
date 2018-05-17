@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Inject } from '@angular/core';
 import { Web3Service } from '../util/web3.service';
 import { DacoService } from '../util/daco.sevice';
 import { count } from 'rxjs/operator/count';
+import { DOCUMENT } from '@angular/platform-browser';
 
 declare let jQuery: any;
 
@@ -78,6 +79,9 @@ export class ApplicationComponent {
   descriptionOfCampaign: any;
   linkOfCampaign: any;
 
+  lookTransactionButton: boolean = false;
+  transactionLink: string = '';
+
 
   private counts: any[] = [];
 
@@ -88,7 +92,9 @@ export class ApplicationComponent {
 
   constructor(
 
-    private dacoService: DacoService
+    private dacoService: DacoService,
+    @Inject(DOCUMENT) private document: any
+
   ) {
     console.log('Constructor: ' + ' Application');
 
@@ -134,10 +140,23 @@ export class ApplicationComponent {
 
    
     var result = await this.dacoService.newProposal(this.addressWallet, this.amountGoal, this.descriptionOfCampaign, this.linkOfCampaign);
+    this.transactionLink = result.tx;
+    this.lookTransactionButton = true;
+
 
    
 
   }
+
+  lookData() {
+  
+    window.open("https://rinkeby.etherscan.io/tx/" + this.transactionLink, "_blank");
+  
+
+
+
+  }
+
 
 
 

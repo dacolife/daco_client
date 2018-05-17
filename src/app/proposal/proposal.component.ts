@@ -49,7 +49,7 @@ export class ProposalComponent {
 
   columns: Array<any> = [
     { title: 'Заявитель', name: 'addressOwner', sort: false },
-    { title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
+    //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
     { title: 'Сумма', name: 'amount', sort: false },
     { title: 'Описание заявки', name: 'description', sort: false },
     { title: 'Ссылка', name: 'link', sort: false },

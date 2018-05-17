@@ -90,8 +90,9 @@ export class DacoService {
 
   watchAccount() {
     this.web3Service.accountsObservable.subscribe((accounts) => {
-
-      // this.accountsObservable.next(accounts);
+      this.accounts = accounts;
+      console.log("watch account");
+       this.accountsObservable.next(accounts);
       this.setupDacoContract();
 
     });
@@ -242,7 +243,7 @@ export class DacoService {
       var numProposals = await this.deployedDaco.numProposals();//узнать число участников
       var items: any[] = [];
       for (var i = 0; i < numProposals.c[0]; i++) {
-        var address = await this.deployedDaco.proposalsAddr(i); //узнать адрес по номеру участника
+        var address = await this.deployedDaco.proposalsHash(i); //узнать адрес по номеру участника
 
 
         var dat = await this.deployedDaco.getCampaignCommonInfo(address); //узнать инфу участника по адресу
@@ -322,7 +323,7 @@ export class DacoService {
       var numProposals = await this.deployedDaco.numCampaigns();//узнать число участников
       var items: any[] = [];
       for (var i = 0; i < numProposals.c[0]; i++) {
-        var address = await this.deployedDaco.campaignsAddr(i); //узнать адрес по номеру участника
+        var address = await this.deployedDaco.campaignsHash(i); //узнать адрес по номеру участника
 
 
         var dat = await this.deployedDaco.getCampaignCommonInfo(address); //узнать инфу участника по адресу
@@ -436,15 +437,17 @@ export class DacoService {
 
     try {
 
+      //only for testing just 1 wallet and amount
       var wallets = [];
       wallets.push(addressWallet);
-      wallets.push(addressWallet);
+      //wallets.push(addressWallet);
       var amounts = [];
       amounts.push(amountGoal);
-      amounts.push(amountGoal + 1);
+      //amounts.push(amountGoal + 1);
       var enddate = 1526710599;
-      debugger;
-      var items = await this.deployedDaco.newProposal(wallets, amounts, enddate , descriptionOfCampaign, linkOfCampaign,  { from: addressWallet });
+      // debugger;
+      if (this.accounts[0])
+      var items = await this.deployedDaco.newProposal(wallets, amounts, enddate, descriptionOfCampaign, linkOfCampaign, { from: this.accounts[0] });
 
 
       return items;

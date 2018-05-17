@@ -16,6 +16,8 @@ import { SearchPipe } from './pipes/search.pipe';
 import { NotificationsLoadDirective } from './notifications/notifications-load.directive';
 import { NotificationsComponent } from './notifications/notifications.component';
 
+import { UtilModule } from '../util/util.module';
+
 
 
 
@@ -30,7 +32,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     BsDropdownModule.forRoot(),
     ROUTES,
     FormsModule,
-    LoadingBarRouterModule
+    LoadingBarRouterModule,
+    UtilModule
 
   ],
 

@@ -36,7 +36,7 @@
 </a>
 <!-- this part is hidden for xs screens -->
   <!-- search form! link it to your search server -->
-<form class="navbar-form d-none d-md-block mr-auto" role="search">
+<!--<form class="navbar-form d-none d-md-block mr-auto" role="search">
   <div class="form-group">
     <div class="input-group input-group-no-border">
       <input class="form-control" type="text" placeholder="Search Dashboard">
@@ -47,7 +47,7 @@
       </span>
     </div>
   </div>
-</form>
+</form>-->
 <ul class="navbar-nav mr-3 d-none d-md-flex flex-row" (click)="$event.preventDefault()">
     <li class="nav-item dropdown" dropdown placement="bottom right" [autoClose]="false">
       <a href="#" dropdownToggle class="nav-link dropdown-toggle dropdown-toggle-notifications"
@@ -56,19 +56,19 @@
                   <img class="rounded-circle" src="assets/img/people/a5.jpg" alt="...">
               </span>
         &nbsp;
-        Philip&nbsp;<strong>Smith</strong>&nbsp;
-              <span class="fw-bold badge badge-pill badge-warning p-1 text-gray">
+        Wallet:&nbsp;{{currentAccount}}&nbsp;
+              <!--<span class="fw-bold badge badge-pill badge-warning p-1 text-gray">
                   13
-              </span>
-        <b class="caret"></b>
+              </span>-->
+        <!--<b class="caret"></b>-->
       </a>
       <!-- ready to use notifications dropdown. inspired by smartadmin template.
                    consists of three components:
                    notifications, messages, progress. leave or add what's important for you.
                    uses Sing's ajax-load plugin for async content loading. See #load-notifications-btn -->
-      <app-notifications *dropdownMenu class="dropdown-menu dropdown-menu-right animated animated-fast fadeInUp"></app-notifications>
+      <!--<app-notifications *dropdownMenu class="dropdown-menu dropdown-menu-right animated animated-fast fadeInUp"></app-notifications>-->
     </li>
-    <li class="nav-item dropdown" dropdown placement="bottom right">
+    <!--<li class="nav-item dropdown" dropdown placement="bottom right">
       <a href="#" class="nav-link dropdown-toggle" dropdownToggle>
         <i class="fa fa-cog fa-lg"></i>
       </a>
@@ -96,5 +96,5 @@
           <p class="text">Hi there! <br> This is a completely new version of Sing App <br> built with <strong class="text-danger">Angular 5.0 Final Release</strong> </p>
         </div>
       </div>
-    </li>
+    </li>-->
   </ul>
