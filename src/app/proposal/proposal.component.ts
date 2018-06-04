@@ -54,6 +54,7 @@ export class ProposalComponent {
     { title: 'Описание заявки', name: 'description', sort: false },
     { title: 'Ссылка', name: 'link', sort: false },
     { title: 'Дата заявки', name: 'applySince', sort: false },
+    { title: 'Дата окончания', name: 'endDate', sort: false },
     { title: 'Количество голосов', name: 'numberOfVotes', sort: false }
   ];
   page: number = 1;

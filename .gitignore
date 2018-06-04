@@ -1,6 +1,6 @@
 
 flattener
 node_modules
-
+dist
 .idea
 .vs

@@ -1,0 +1,36 @@
+@import "../../scss/helpers";
+@import "../../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min";
+@import "../../../node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min";
+
+
+
+
+
+
+
+
+.btn-label {
+  background: transparent;
+  left: 2px;
+  padding: 1px 6px;
+}
+
+
+
+
+/**
+ * Bootstrap select
+ */
+
+.selectpicker.form-control {
+  height: auto;
+}
+
+
+/**
+* datetime
+**/
+.input-group {
+  width: auto;
+}
+

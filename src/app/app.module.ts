@@ -17,6 +17,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 //import { CampaignKnownComponent } from './campaign-known/campaign-known.component';
 //import { CampaignCompletedComponent } from './campaign-completed/campaign-completed.component';
 //import { FaqComponent } from './faq/faq.component';
+import * as $ from 'jquery'
 
 
 

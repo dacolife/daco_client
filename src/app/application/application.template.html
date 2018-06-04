@@ -5,43 +5,8 @@
   </div>
   <!-- /.col-lg-12 -->
 </div>
-<!-- /.row -->
-<!--<div class="row">
-  <div class="col-lg-10">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Для организации компании заполните анкету
-      </div>
-      <div class="panel-body " style="margin: 0 60px;">
-        <div class="row">
-          <div class="col-lg-10">
 
 
-            <div class="form-group">
-              <label>Адрес кошелька для сбора средств</label>
-              <input class="form-control" placeholder="Адрес кошелька для сбора средств" ng-model="addressWallet">
-            </div>
-            <div class="form-group">
-              <label>Сумма которую необходимо набрать</label>
-              <input class="form-control" placeholder="Сумма в ETH" ng-model="amountGoal">
-            </div>
-            <div class="form-group">
-              <label>На что необходимы средства</label>
-              <input class="form-control" placeholder="Немного информации о целях сбора средств" ng-model="descriptionOfCampaign">
-            </div>
-            <div class="form-group">
-              <label>Ссылка на официальную страницу сбора</label>
-              <input class="form-control" placeholder="Укажите ссылку" ng-model="linkOfCampaign">
-            </div>
-
-            <button type="submit" class="btn btn-primary right" ng-click="sendData(addressWallet, amountGoal, descriptionOfCampaign, linkOfCampaign)">Создать</button>
-            <button type="submit" class="btn btn-warning" ng-show="lookTransactionButton">Следить</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>-->
 
 <div class="row">
   <div class="col-lg-6">
@@ -73,28 +38,28 @@
               </div>
             </div>
             <!--<div class="form-group row">
-      <label for="normal-field" class="col-md-4  col-form-label text-md-right"></label>
-      <div class="col-md-7 ">
-        <div class="form-group multiple-form-group" data-max="3">
-          <label>Multiple inputs (with data-max=3)</label>
+    <label for="normal-field" class="col-md-4  col-form-label text-md-right"></label>
+    <div class="col-md-7 ">
+      <div class="form-group multiple-form-group" data-max="3">
+        <label>Multiple inputs (with data-max=3)</label>
 
-          <div class="form-group input-group">
-            <input type="text" name="multiple[]" class="form-control">
-            <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
-          </div><div class="form-group input-group">
-            <input type="text" name="multiple[]" class="form-control">
-            <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
-          </div><div class="form-group input-group">
-            <input type="text" name="multiple[]" class="form-control">
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default btn-add" disabled="disabled">
-                +
-              </button>
-            </span>
-          </div>
+        <div class="form-group input-group">
+          <input type="text" name="multiple[]" class="form-control">
+          <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
+        </div><div class="form-group input-group">
+          <input type="text" name="multiple[]" class="form-control">
+          <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
+        </div><div class="form-group input-group">
+          <input type="text" name="multiple[]" class="form-control">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-add" disabled="disabled">
+              +
+            </button>
+          </span>
         </div>
       </div>
-    </div>-->
+    </div>
+  </div>-->
 
 
             <div class="form-group row">
@@ -109,7 +74,22 @@
                 <input type="text" id="normal-field" class="form-control" [(ngModel)]="linkOfCampaign" name="linkOfCampaign" placeholder="Укажите ссылку">
               </div>
             </div>
+            <div class="form-group row">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Укажите Дату</label>
+              <div class="col-md-7 ">
+                   <datetime [(ngModel)]="date" name="datetime" id="datetimepicker2i" [timepicker]="{ icon: 'fa fa-clock-o' }" [datepicker]="{ icon: 'fa fa-calendar' }"></datetime>
+              </div>
+            </div>
+
           </fieldset>
+          <!--<fieldset>
+            <legend>
+              Date & Time
+            </legend>
+            <div class="form-group">
+          
+            </div>
+          </fieldset>-->
 
           <div class="form-actions">
             <div class="btn-block text-center">
@@ -118,7 +98,7 @@
 
             </div>
           </div>
-      
+
         </form>
       </div>
     </section>

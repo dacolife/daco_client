@@ -18,7 +18,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class Web3Service {
 
-  private web3: any;
+  private _web3: any;
   private accounts: any[];
   public DacoInstance: any;
 
@@ -36,17 +36,22 @@ export class Web3Service {
     if (!this.windowRef.nativeWindow.web3) {
       throw new Error('Not a metamask browser');
     }
-    this.web3 = new Web3(this.windowRef.nativeWindow.web3.currentProvider);
+    this._web3 = new Web3(this.windowRef.nativeWindow.web3.currentProvider);
+  }
+
+
+  get web3(): any {
+    return this._web3;
   }
 
   private setupMetacoinContract() {
     this.setupMetamaskWeb3();
     this.DacoInstance = contract(daco_artifacts);
-    this.DacoInstance.setProvider(this.web3.currentProvider);
+    this.DacoInstance.setProvider(this._web3.currentProvider);
   }
 
   private refreshAccounts() {
-    this.web3.eth.getAccounts((err, accs) => {
+    this._web3.eth.getAccounts((err, accs) => {
       if (err != null) {
         alert(`There was an error fetching your accounts.`);
         return;

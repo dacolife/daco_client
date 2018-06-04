@@ -11,7 +11,7 @@ import { PaginationModule } from 'ngx-bootstrap';
 import { Ng2TableModule } from 'ng2-table';
 
 import { TableModule } from '../shared/components/table/table.module';
-
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 
 
 
@@ -30,7 +30,8 @@ export const routes = [
     WidgetModule,
     Ng2TableModule,
     TableModule,
-    UtilModule
+    UtilModule,
+    NKDatetimeModule 
   ],
   declarations: [ApplicationComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA ]

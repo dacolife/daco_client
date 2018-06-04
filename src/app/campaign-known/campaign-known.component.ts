@@ -36,7 +36,8 @@ export class CampaignKnownComponent {
     { title: 'Описание кампании', name: 'description', sort: false },
     { title: 'Ссылка', name: 'link', sort: false },
     { title: 'Дата заявки', name: 'proposalSince', sort: false },
-    { title: 'Дата кампании', name: 'campaignSince', sort: false }
+    { title: 'Дата кампании', name: 'campaignSince', sort: false },
+    { title: 'Дата окончания', name: 'endDate', sort: false }
   ];
   page: number = 1;
   itemsPerPage: number = 10;

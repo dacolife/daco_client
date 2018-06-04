@@ -22,7 +22,7 @@
               (tableChanged)="onChangeTable(config)"
               [rows]="rows" [columns]="columns">
     </ng-table>
-    <!--<pagination *ngIf="config.paging"
+    <pagination *ngIf="config.paging"
                 class="pagination-sm"
                
                 [totalItems]="length"
@@ -32,7 +32,7 @@
                 [rotate]="false"
                 (pageChanged)="onChangeTable(config, $event)"
                 (numPages)="numPages = $event">
-    </pagination>-->
+    </pagination>
     <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
   </div>
 </section>

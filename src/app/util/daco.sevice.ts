@@ -52,6 +52,7 @@ export class DacoService {
     console.log('Constructor: ' + 'Daco');
     //this.setupDacoContract();
     //var ewr = daco_artifacts;
+    this.web3 = web3Service.web3;
     // alert(1);
     this.watchAccount();
 
@@ -254,11 +255,13 @@ export class DacoService {
         items.push({
           addressOwner: dat[3],
           addressWallet: dat[4],
-          amount: dat[5].c[0],
+          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
+          //amount: dat[5].c[0]/10000,
           description: dat[6],
           link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
           // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
           applySince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+          endDate: new Date(dat[4].c[0] * 1000).toLocaleString("ru"),
           applySinceForCompare: +data[4].c[0],
           numberOfVotes: data[3].c[0],
           number: i
@@ -334,13 +337,15 @@ export class DacoService {
         items.push({
           addressOwner: dat[3],
           addressWallet: dat[4],
-          amount: dat[5].c[0],
+          //amount: dat[5].c[0],
+          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
           description: dat[6],
           number: i,
           link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
           // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
           proposalSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
           proposalSinceForCompare: +data[4].c[0],
+          endDate: new Date(dat[4].c[0] * 1000).toLocaleString("ru"),
           campaignSince: data[5].c[0] ? new Date(data[5].c[0] * 1000).toLocaleString("ru") : "Неизвестна"
         });
       };
@@ -411,7 +416,8 @@ export class DacoService {
         items.push({
           addressOwner: dat[3],
           addressWallet: dat[4],
-          amount: dat[5].c[0],
+          //amount: dat[5].c[0],
+          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
           description: dat[6],
           number: +i,
           link: data[0] ? data[0].slice(0, 4) == "http" ? data[0] : "http://" + data[0] : data[0],
@@ -433,7 +439,7 @@ export class DacoService {
 
   }
 
-  async newProposal(addressWallet, amountGoal, descriptionOfCampaign, linkOfCampaign) {
+  async newProposal(addressWallet, amountGoal, descriptionOfCampaign, linkOfCampaign,time) {
 
     try {
 
@@ -442,12 +448,14 @@ export class DacoService {
       wallets.push(addressWallet);
       //wallets.push(addressWallet);
       var amounts = [];
-      amounts.push(amountGoal);
+      var saf = this.web3.utils.toWei(amountGoal, 'ether').toString();
+      debugger;
+      amounts.push(saf);
       //amounts.push(amountGoal + 1);
       var enddate = 1526710599;
       // debugger;
       if (this.accounts[0])
-      var items = await this.deployedDaco.newProposal(wallets, amounts, enddate, descriptionOfCampaign, linkOfCampaign, { from: this.accounts[0] });
+      var items = await this.deployedDaco.newProposal(wallets, amounts, time, descriptionOfCampaign, linkOfCampaign, { from: this.accounts[0] });
 
 
       return items;

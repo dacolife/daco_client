@@ -1,4 +1,4 @@
-import { Component, ViewChild, Inject } from '@angular/core';
+import { Component, ViewChild, Inject, ViewEncapsulation } from '@angular/core';
 import { Web3Service } from '../util/web3.service';
 import { DacoService } from '../util/daco.sevice';
 import { count } from 'rxjs/operator/count';
@@ -37,7 +37,9 @@ export class Counts {
 
 @Component({
   selector: 'app-application',
-  templateUrl: './application.template.html'
+  templateUrl: './application.template.html',
+  styleUrls: ['./elements.style.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ApplicationComponent {
 
@@ -87,6 +89,8 @@ export class ApplicationComponent {
 
 
   status = '';
+
+  date: any = Date.now();
 
 
 
@@ -138,8 +142,8 @@ export class ApplicationComponent {
 
   async sendData() {
 
-   
-    var result = await this.dacoService.newProposal(this.addressWallet, this.amountGoal, this.descriptionOfCampaign, this.linkOfCampaign);
+    debugger;
+    var result = await this.dacoService.newProposal(this.addressWallet, this.amountGoal, this.descriptionOfCampaign, this.linkOfCampaign, this.date.getTime()/1000);
     this.transactionLink = result.tx;
     this.lookTransactionButton = true;
 
