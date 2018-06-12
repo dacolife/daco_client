@@ -17,10 +17,10 @@ import { TableComponent } from '../shared/components/table/table.component';
 
 
 @Component({
-  selector: 'app-campaign-known',
-  templateUrl: './campaign-known.template.html'
+  selector: 'app-campaign-info',
+  templateUrl: './campaign-info.component.html'
 })
-export class CampaignKnownComponent {
+export class CampaignInfoComponent {
 
   @ViewChild(TableComponent)
   private tableComponent: TableComponent;
@@ -30,14 +30,14 @@ export class CampaignKnownComponent {
 
 
   columns: Array<any> = [
-    { title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
+    { title: 'Заявитель', name: 'addressOwner', sort: false,type:'link' },
     //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
-    { title: 'Сумма', name: 'amount', sort: false, type: 'text'},
-    { title: 'Описание кампании', name: 'description', sort: false, type: 'text' },
-    { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink'},
-    { title: 'Дата заявки', name: 'proposalSince', sort: false, type: 'text' },
-    { title: 'Дата кампании', name: 'campaignSince', sort: false, type: 'text' },
-    { title: 'Дата окончания', name: 'endDate', sort: false, type: 'text' }
+    { title: 'Сумма', name: 'amount', sort: false, type: 'text' },
+    { title: 'Описание кампании', name: 'description', sort: false, type: 'text'},
+    { title: 'Ссылка', name: 'link', sort: false,type: 'descriptionlink' },
+    { title: 'Дата кампании', name: 'campaignSince', sort: false, type: 'text'},
+    { title: 'Дата закрытия', name: 'campaignUntil', sort: false, type: 'text'},
+    { title: 'Всего собрано', name: 'finishedAmount', sort: false, type: 'text'},
   ];
   page: number = 1;
   itemsPerPage: number = 10;
@@ -96,7 +96,7 @@ export class CampaignKnownComponent {
     try {
 
 
-      this.members = await this.dacoService.getСampaignKnown();
+      this.members = await this.dacoService.getСampaignCompleted();
       this.tableComponent.refreshData(this.members);
       console.log('Refreshing data');
 

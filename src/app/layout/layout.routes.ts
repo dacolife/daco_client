@@ -12,6 +12,8 @@ const routes: Routes = [
     { path: 'application', loadChildren: '../application/application.module#ApplicationModule' },
     { path: 'faq', loadChildren: '../faq/faq.module#FaqModule' },
 
+    { path: 'campaignInfo', loadChildren: '../campaign-info/campaign-info.module#CampaignInfoModule' },
+
     //{ path: 'another-page', loadChildren: '../another/another.module#AnotherModule' },
   ]}
 ];

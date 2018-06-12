@@ -10,7 +10,6 @@ declare let jQuery: any;
 
 declare let require: any;
 
-const metacoin_artifacts = require('../../../build/contracts/DACOMain.json');
 
 export class StatsViewModel {
 
@@ -45,12 +44,12 @@ export class MemberComponent {
 
   rows: Array<any> = [];
   columns: Array<any> = [
-    { title: 'Статус', name: 'status', sort: false },
-    { title: 'Имя', name: 'name', sort: false},
-    { title: 'ССЫЛКА УЧАСТНИКА', name: 'link', sort: false},
-    { title: 'ДАТА РЕГИСТРАЦИИ', name: 'memmberSince', sort: false },
-    { title: 'ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ', name: 'campaignCompleted', sort: false },
-    { title: 'ЗАВЕРШЕННЫЕ КАМПАНИИ', name: 'campaignNew', sort: false }
+    { title: 'Статус', name: 'status', sort: false,type:'text' },
+    { title: 'Имя', name: 'name', sort: false, type: 'text'},
+    { title: 'ССЫЛКА УЧАСТНИКА', name: 'link', sort: false, type: 'descriptionlink'},
+    { title: 'ДАТА РЕГИСТРАЦИИ', name: 'memmberSince', sort: false, type: 'text'},
+    { title: 'ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ', name: 'campaignCompleted', sort: false, type: 'text' },
+    { title: 'ЗАВЕРШЕННЫЕ КАМПАНИИ', name: 'campaignNew', sort: false, type: 'text'}
    
   
  
@@ -96,12 +95,14 @@ export class MemberComponent {
    private dacoService: DacoService
   ) {
     console.log('Constructor: ' + 'MemberComponent');
-    var ewr = metacoin_artifacts;
+    
   }
 
   async ngOnInit()  {
     //console.log('OnInit: ' + this);
     //console.log(this);
+    await this.dacoService.setupDacoContract();
+    await this.refreshData();
     this.watchAccount();
     //this.web3Service.artifactsToContract(metacoin_artifacts)
     //  .then((MetaCoinAbstraction) => {
@@ -109,8 +110,7 @@ export class MemberComponent {
     //  });
 
     // this.refreshData();
-    await this.dacoService.setupDacoContract();
-    await  this.refreshData();
+
     //if (this.dacoService.isLoaded)
     //  this.refreshData();
     //else {

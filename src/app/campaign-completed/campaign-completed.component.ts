@@ -30,14 +30,14 @@ export class CampaignCompletedComponent {
 
 
   columns: Array<any> = [
-    { title: 'Заявитель', name: 'addressOwner', sort: false },
+    { title: 'Заявитель', name: 'addressOwner', sort: false,type:'link' },
     //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
-    { title: 'Сумма', name: 'amount', sort: false },
-    { title: 'Описание кампании', name: 'description', sort: false },
-    { title: 'Ссылка', name: 'link', sort: false },
-    { title: 'Дата кампании', name: 'campaignSince', sort: false },
-    { title: 'Дата закрытия', name: 'campaignUntil', sort: false },
-    { title: 'Всего собрано', name: 'finishedAmount', sort: false },
+    { title: 'Сумма', name: 'amount', sort: false, type: 'text' },
+    { title: 'Описание кампании', name: 'description', sort: false, type: 'infolink'},
+    { title: 'Ссылка', name: 'link', sort: false,type: 'descriptionlink' },
+    { title: 'Дата кампании', name: 'campaignSince', sort: false, type: 'text'},
+    { title: 'Дата закрытия', name: 'campaignUntil', sort: false, type: 'text'},
+    { title: 'Всего собрано', name: 'finishedAmount', sort: false, type: 'text'},
   ];
   page: number = 1;
   itemsPerPage: number = 10;

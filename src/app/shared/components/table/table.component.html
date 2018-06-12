@@ -7,84 +7,35 @@
     </div>
   </header>
   <div class="widget-body">
-    <p>
-      Здесь Вы можете узнать более подробную информацию о Делегатах
-
-    </p>
-    <p>
-      <input *ngIf="config.filtering"
-             [ngTableFiltering]="config.filtering"
-             (tableChanged)="onChangeTable(config)"
-             class="form-control input-no-border bg-gray-lighter"
-             placeholder="Filter Table" type="text">
-    </p>
-    <ng-table [config]="config.sorting"
-              (tableChanged)="onChangeTable(config)"
-              [rows]="rows" [columns]="columns">
-    </ng-table>
-    <pagination *ngIf="config.paging"
-                class="pagination-sm"
-               
-                [totalItems]="length"
-                [itemsPerPage]="itemsPerPage"
-                [maxSize]="maxSize"
-                [boundaryLinks]="true"
-                [rotate]="false"
-                (pageChanged)="onChangeTable(config, $event)"
-                (numPages)="numPages = $event">
-    </pagination>
-    <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
-  </div>
-</section>
-
-<section class="widget" widget>
-  <header>
-    <h4>The <span class="fw-semi-bold">Angular</span> Way</h4>
-    <div class="widget-controls">
-      <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-      <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-      <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
-    </div>
-  </header>
-  <div class="widget-body">
-    <p>
-      Column sorting, live search, pagination. Built with
-      <a href="https://github.com/mariuszfoltak/angular2-datatable" target="_blank">angular2-datatables</a>
-    </p>
     <div class="mt">
       <div class="width-200 float-right">
         <div class="input-group input-group-sm input-group-transparent input-group-rounded">
-          <span class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fa fa-search"></i>
-            </span>
-          </span>
-          <!--<input class="form-control form-control-sm" id="table-search-input" [(ngModel)]="searchText" type="text" placeholder="Search Countries">-->
+           <!--<input class="form-control form-control-sm" id="table-search-input" [(ngModel)]="searchText" type="text" placeholder="Search Countries">-->
         </div>
       </div>
-      <table class="table table-striped table-hover" [mfData]="data | SearchPipe : searchText" #mf="mfDataTable" [mfRowsOnPage]="10">
+      <table class="table table-striped table-hover" [mfData]="ng2TableData" #mf="mfDataTable" [mfRowsOnPage]="10">
         <thead>
           <tr>
-            <th style="width: 20%">
-              <mfDefaultSorter by="name">Name</mfDefaultSorter>
-            </th>
-            <th style="width: 50%">
-              <mfDefaultSorter by="email">Email</mfDefaultSorter>
-            </th>
-            <th style="width: 10%">
-              <mfDefaultSorter by="age">Age</mfDefaultSorter>
-            </th>
-            <th style="width: 20%">
-              <mfDefaultSorter by="city">City</mfDefaultSorter>
+            <th *ngFor="let col of columns">
+              <mfDefaultSorter by="name">{{col.title}}</mfDefaultSorter>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of mf.data">
-            <td>{{item.name}}</td>
-            <td>{{item.email}}</td>
+            <td *ngFor="let col of columns" class="text-left" [ngSwitch]="col.type">
+
+              <a *ngSwitchCase="'link'" href="https://rinkeby.etherscan.io/address/{{item.addressOwner}}" target="_blank"
+                 title="{{item[col.name]}}">{{item[col.name]}}...</a>
+              <a *ngSwitchCase="'descriptionlink'" href="{{item[col.name]}}" target="_blank" title="{{item[col.name]}}">{{item[col.name]}}</a>
+              <a *ngSwitchCase="'infolink'" [routerLink]=" ['#campaignInfo'] "  title="{{item[col.name]}}">{{item[col.name]}}</a>
+              <ng-container *ngSwitchCase="'text'">{{item[col.name]}}</ng-container>
+
+            </td>
+
+            <!--<td>{{item.email}}</td>
             <td class="text-right">{{item.age}}</td>
-            <td>{{item.city | uppercase}}</td>
+            <td>{{item.city | uppercase}}</td>-->
           </tr>
         </tbody>
         <tfoot>
@@ -101,36 +52,3 @@
 
 
 
-<table class="table table-striped table-bordered" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
-  <thead>
-    <tr>
-      <th style="width: 20%">
-        <mfDefaultSorter by="name">Name</mfDefaultSorter>
-      </th>
-      <th style="width: 50%">
-        <mfDefaultSorter by="email">Email</mfDefaultSorter>
-      </th>
-      <th style="width: 10%">
-        <mfDefaultSorter by="age">Age</mfDefaultSorter>
-      </th>
-      <th style="width: 20%">
-        <mfDefaultSorter by="city">City</mfDefaultSorter>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of mf.data">
-      <td>{{item.name}}</td>
-      <td>{{item.email}}</td>
-      <td class="text-right">{{item.age}}</td>
-      <td>{{item.city | uppercase}}</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="4">
-        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-      </td>
-    </tr>
-  </tfoot>
-</table>

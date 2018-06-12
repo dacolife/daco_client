@@ -10,7 +10,11 @@ import { PaginationModule } from 'ngx-bootstrap';
 import { Ng2TableModule } from 'ng2-table';
 import { DataTableModule } from 'angular2-datatable';
 import { WidgetModule } from '../../../layout/widget/widget.module';
-import { SearchPipe } from './pipes/search-pipe';
+//import { SearchPipe } from './pipes/search-pipe';
+
+import { RouterModule, PreloadAllModules} from '@angular/router';
+
+import { ROUTES } from '../../../app.routes';
 
 
 
@@ -19,9 +23,10 @@ import { SearchPipe } from './pipes/search-pipe';
     PaginationModule.forRoot(),
     WidgetModule,
     Ng2TableModule,
-    DataTableModule
+    DataTableModule,
+    RouterModule
   ],
-  declarations: [TableComponent, SearchPipe],
+  declarations: [TableComponent],
   exports: [TableComponent, 
     CommonModule, FormsModule]
 })

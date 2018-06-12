@@ -48,14 +48,14 @@ export class ProposalComponent {
 
 
   columns: Array<any> = [
-    { title: 'Заявитель', name: 'addressOwner', sort: false },
+    { title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
     //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
-    { title: 'Сумма', name: 'amount', sort: false },
-    { title: 'Описание заявки', name: 'description', sort: false },
-    { title: 'Ссылка', name: 'link', sort: false },
-    { title: 'Дата заявки', name: 'applySince', sort: false },
-    { title: 'Дата окончания', name: 'endDate', sort: false },
-    { title: 'Количество голосов', name: 'numberOfVotes', sort: false }
+    { title: 'Сумма', name: 'amount', sort: false, type: 'text'},
+    { title: 'Описание заявки', name: 'description', sort: false, type: 'infolink'},
+    { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink' },
+    { title: 'Дата заявки', name: 'applySince', sort: false, type: 'text' },
+    { title: 'Дата окончания', name: 'endDate', sort: false, type: 'text'},
+    { title: 'Количество голосов', name: 'numberOfVotes', sort: false, type: 'text' }
   ];
   page: number = 1;
   itemsPerPage: number = 10;

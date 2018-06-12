@@ -1,4 +1,7 @@
-import {  OnInit, Input } from '@angular/core';
+import { OnInit, Input, ElementRef } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -27,151 +30,13 @@ const metacoin_artifacts = require('../../../../../build/contracts/DACOMain.json
 export class TableComponent {
 
 
-   data: Array<any> = [
-    {
-    "name": "Wing",
-    "email": "tellus.eu.augue@arcu.com",
-    "regDate": "2016-01-09T14:48:34-08:00",
-    "city": "Paglieta",
-    "age": 25
-  },
-    {
-      "name": "Whitney",
-      "email": "sed.dictum@Donec.org",
-      "regDate": "2017-01-23T20:09:52-08:00",
-      "city": "Bear",
-      "age": 32
-    },
-    {
-      "name": "Oliver",
-      "email": "mauris@Craslorem.ca",
-      "regDate": "2015-11-19T19:11:33-08:00",
-      "city": "Bruderheim",
-      "age": 31
-    },
-    {
-      "name": "Vladimir",
-      "email": "mi.Aliquam@Phasellus.net",
-      "regDate": "2015-11-02T07:59:34-08:00",
-      "city": "Andenne",
-      "age": 50
-    },
-    {
-      "name": "Maggy",
-      "email": "ligula@acorciUt.edu",
-      "regDate": "2017-02-25T15:42:17-08:00",
-      "city": "HomprŽ",
-      "age": 24
-     },
-     {
-       "name": "Wing",
-       "email": "tellus.eu.augue@arcu.com",
-       "regDate": "2016-01-09T14:48:34-08:00",
-       "city": "Paglieta",
-       "age": 25
-     },
-     {
-       "name": "Whitney",
-       "email": "sed.dictum@Donec.org",
-       "regDate": "2017-01-23T20:09:52-08:00",
-       "city": "Bear",
-       "age": 32
-     },
-     {
-       "name": "Oliver",
-       "email": "mauris@Craslorem.ca",
-       "regDate": "2015-11-19T19:11:33-08:00",
-       "city": "Bruderheim",
-       "age": 31
-     },
-     {
-       "name": "Vladimir",
-       "email": "mi.Aliquam@Phasellus.net",
-       "regDate": "2015-11-02T07:59:34-08:00",
-       "city": "Andenne",
-       "age": 50
-     },
-     {
-       "name": "Maggy",
-       "email": "ligula@acorciUt.edu",
-       "regDate": "2017-02-25T15:42:17-08:00",
-       "city": "HomprŽ",
-       "age": 24
-     },
-     {
-       "name": "Wing",
-       "email": "tellus.eu.augue@arcu.com",
-       "regDate": "2016-01-09T14:48:34-08:00",
-       "city": "Paglieta",
-       "age": 25
-     },
-     {
-       "name": "Whitney",
-       "email": "sed.dictum@Donec.org",
-       "regDate": "2017-01-23T20:09:52-08:00",
-       "city": "Bear",
-       "age": 32
-     },
-     {
-       "name": "Oliver",
-       "email": "mauris@Craslorem.ca",
-       "regDate": "2015-11-19T19:11:33-08:00",
-       "city": "Bruderheim",
-       "age": 31
-     },
-     {
-       "name": "Vladimir",
-       "email": "mi.Aliquam@Phasellus.net",
-       "regDate": "2015-11-02T07:59:34-08:00",
-       "city": "Andenne",
-       "age": 50
-     },
-     {
-       "name": "Maggy",
-       "email": "ligula@acorciUt.edu",
-       "regDate": "2017-02-25T15:42:17-08:00",
-       "city": "HomprŽ",
-       "age": 24
-     },
-     {
-       "name": "Wing",
-       "email": "tellus.eu.augue@arcu.com",
-       "regDate": "2016-01-09T14:48:34-08:00",
-       "city": "Paglieta",
-       "age": 25
-     },
-     {
-       "name": "Whitney",
-       "email": "sed.dictum@Donec.org",
-       "regDate": "2017-01-23T20:09:52-08:00",
-       "city": "Bear",
-       "age": 32
-     },
-     {
-       "name": "Oliver",
-       "email": "mauris@Craslorem.ca",
-       "regDate": "2015-11-19T19:11:33-08:00",
-       "city": "Bruderheim",
-       "age": 31
-     },
-     {
-       "name": "Vladimir",
-       "email": "mi.Aliquam@Phasellus.net",
-       "regDate": "2015-11-02T07:59:34-08:00",
-       "city": "Andenne",
-       "age": 50
-     },
-     {
-       "name": "Maggy",
-       "email": "ligula@acorciUt.edu",
-       "regDate": "2017-02-25T15:42:17-08:00",
-       "city": "HomprŽ",
-       "age": 24
-     }
-   ];
+
+  router: Router;
+  location: Location;
+  $el: any;
 
   @Input() ng2TableData: Array<any>;
-  @Input() columns: Array<any> ;
+  @Input() columns: Array<any>;
 
 
 
@@ -202,7 +67,7 @@ export class TableComponent {
   ERC223Coin: any;
 
   isLoaded: boolean = false;
-  
+
 
 
   private counts: any[] = [];
@@ -214,18 +79,23 @@ export class TableComponent {
 
   constructor(
     private web3Service: Web3Service
-    , private dacoService: DacoService
+    , private dacoService: DacoService,
+    router: Router, //location: Location,
+    el: ElementRef
   ) {
     console.log('Constructor: ' + 'TableComponent');
     var ewr = metacoin_artifacts;
+    this.$el = jQuery(el.nativeElement);
+    this.router = router;
+   // this.location = location;
   }
 
-   ngOnInit()  {
+  ngOnInit() {
 
     //this.watchAccount();
     //await this.dacoService.setupDacoContract();
     //await this.refreshData();
- 
+
 
     const searchInput = jQuery('#table-search-input, #search-countries');
     searchInput
@@ -236,10 +106,28 @@ export class TableComponent {
         jQuery(e.target).closest('.input-group').removeClass('focus');
       });
 
-    //count
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.changeActiveNavigationItem(this.location);
+      }
+    });
+  }
 
+  changeActiveNavigationItem(location): void {
+    //const $newActiveLink = this.$el.find('a[href="#' + location.path().split('?')[0] + '"]');
 
+    //// collapse .collapse only if new and old active links belong to different .collapse
+    //if (!$newActiveLink.is('.active > .collapse > li > a')) {
+    //  this.$el.find('.active .active').closest('.collapse').collapse('hide');
+    //}
+    //this.$el.find('.sidebar-nav .active').removeClass('active');
 
+    //$newActiveLink.closest('li').addClass('active')
+    //  .parents('li').addClass('active');
+
+    //// uncollapse parent
+    //$newActiveLink.closest('.collapse').addClass('in').css('height', '')
+    //  .siblings('a[data-toggle=collapse]').removeClass('collapsed');
   }
 
   watchAccount() {
@@ -263,6 +151,7 @@ export class TableComponent {
       //console.log('Refreshing data');
       //this.ng2TableData = this.tableData;
       this.ng2TableData = members;
+      
       this.onChangeTable(this.config);
 
 
@@ -274,7 +163,7 @@ export class TableComponent {
   }
 
 
-  
+
   changePage(page: any, data: Array<any> = this.ng2TableData): Array<any> {
     const start = (page.page - 1) * page.itemsPerPage;
     const end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
