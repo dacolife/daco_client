@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 import { Web3Service } from '../../../util/web3.service';
 import { DacoService } from '../../../util/daco.sevice';
 import { count } from 'rxjs/operator/count';
+import { debug } from 'util';
 
 declare let jQuery: any;
 
@@ -52,6 +53,8 @@ export class TableComponent {
   maxSize: number = 5;
   numPages: number = 1;
   length: number = 0;
+  account: any = null;
+  test: any = null;
 
   config: any = {
     paging: true,
@@ -67,6 +70,7 @@ export class TableComponent {
   ERC223Coin: any;
 
   isLoaded: boolean = false;
+  isMember: boolean = false;
 
 
 
@@ -90,10 +94,14 @@ export class TableComponent {
    // this.location = location;
   }
 
-  ngOnInit() {
-
-    //this.watchAccount();
-    //await this.dacoService.setupDacoContract();
+  async ngOnInit() {
+  
+    this.dacoService.setupDacoContract();
+    await this.dacoService.test;
+    var members = await this.dacoService.getMembers();
+    debugger;
+    this.watchAccount();
+  
     //await this.refreshData();
 
 
@@ -130,18 +138,47 @@ export class TableComponent {
     //  .siblings('a[data-toggle=collapse]').removeClass('collapsed');
   }
 
-  watchAccount() {
-    //this.dacoService.seriveceObservable.subscribe((test) => {
-    //  //this.accounts = accounts;
-    //  //this.model.account = accounts[0];
-    //  this.refreshData();
-    //  this.isLoaded = true;
+   watchAccount() {
 
-    //});
+    //var member = await this.dacoService.getMember(this.account);
+    this.dacoService.accountsObservable.subscribe(async (accounts) => {
+
+      let result = await this.dacoService.test;
+      debugger;
+  
+      this.account = accounts[0];
+      this.refresh(this.account);
+      this.isLoaded = true;
+     // this.refreshData();
+
+    });
   }
 
 
-  public refreshData(members: any[]) {
+
+  public async refresh(address) {
+
+
+    try {
+
+
+      var member = await this.dacoService.getMember(address);
+      //console.log('Refreshing data');
+      //this.ng2TableData = this.tableData;
+      this.isMember = member.isMember;
+      debugger;
+      this.onChangeTable(this.config);
+
+
+
+    } catch (e) {
+      console.log(e);
+      //this.setStatus('Error getting balance; see log.');
+    }
+  }
+
+
+  public refreshData(items: any[]) {
 
 
     try {
@@ -150,7 +187,7 @@ export class TableComponent {
       //this.tableData = await this.dacoService.getMembers();
       //console.log('Refreshing data');
       //this.ng2TableData = this.tableData;
-      this.ng2TableData = members;
+      this.ng2TableData = items;
       
       this.onChangeTable(this.config);
 

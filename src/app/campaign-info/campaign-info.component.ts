@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Web3Service } from '../util/web3.service';
 import { DacoService } from '../util/daco.sevice';
 import { count } from 'rxjs/operator/count';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 declare let jQuery: any;
 
@@ -30,7 +31,7 @@ export class CampaignInfoComponent {
 
 
   columns: Array<any> = [
-    { title: 'Заявитель', name: 'addressOwner', sort: false,type:'link' },
+    //{ title: 'Заявитель', name: 'addressOwner', sort: false,type:'link' },
     //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
     { title: 'Сумма', name: 'amount', sort: false, type: 'text' },
     { title: 'Описание кампании', name: 'description', sort: false, type: 'text'},
@@ -54,6 +55,8 @@ export class CampaignInfoComponent {
   accounts: string[];
   members: any[] = [];
   isLoaded: boolean = false;
+  campaignInfo: any;
+
 
 
   private counts: any[] = [];
@@ -66,6 +69,7 @@ export class CampaignInfoComponent {
   constructor(
 
     private dacoService: DacoService
+    , private route: ActivatedRoute
   ) {
     console.log('Constructor: ' + 'ProposalComponent');
 
@@ -73,8 +77,43 @@ export class CampaignInfoComponent {
 
   async ngOnInit() {
 
+    //addressOwner:
+    //addressWallet:
+    //amount: this.w
+    //description: d
+    //link: data[1]
+    //// link: data[
+    //applySince: ne
+    //endDate: new D
+    //applySinceForC
+    //numberOfVotes:
+    //hash: hash
     await this.dacoService.setupDacoContract();
-    await this.refreshData();
+   
+    // get param
+    let param1 = this.route.snapshot.queryParams["hash"];
+    let param2 = this.route.snapshot.queryParams["type"];
+
+    switch (param2) {
+      case 'proposal': {
+        this.campaignInfo = await this.dacoService.getProposalInfo(param1);
+        break;
+      }
+      case 'known': {
+        this.campaignInfo = await this.dacoService.getСampaignKnownInfo(param1);
+        //statements; 
+        break;
+      }
+      case 'completed': {
+        //statements; 
+        break;
+      }
+ 
+    } 
+
+  
+    console.log(param1);
+
 
 
   }

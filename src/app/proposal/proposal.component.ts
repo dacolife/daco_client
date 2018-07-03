@@ -48,8 +48,9 @@ export class ProposalComponent {
 
 
   columns: Array<any> = [
-    { title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
+    //{ title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
     //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
+   // { title: 'Голосовать', name: 'vote', sort: false, type: 'text' },
     { title: 'Сумма', name: 'amount', sort: false, type: 'text'},
     { title: 'Описание заявки', name: 'description', sort: false, type: 'infolink'},
     { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink' },
@@ -92,15 +93,43 @@ export class ProposalComponent {
 
   async ngOnInit() {
 
-    await this.dacoService.setupDacoContract();
-    await this.refreshData();
+    
+    this.dacoService.setupDacoContract();
+    this.watchAccount();
+
+    //await this.refreshData();
 
 
   }
 
   watchAccount() {
-    this.dacoService.accountsObservable.subscribe((accounts) => {
+    this.dacoService.accountsObservable.subscribe(async (accounts) => {
       this.accounts = accounts;
+      await this.dacoService.test;
+      var member = await this.dacoService.getMember(this.accounts[0]);
+      //var isMember =
+
+        
+      var member = await this.dacoService.getMember(accounts[0]);
+      //console.log('Refreshing data');
+      //this.ng2TableData = this.tableData;
+      var isMember = member.isMember;
+
+      if (isMember)
+      {
+        this.columns =[
+          //{ title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
+          //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
+          { title: 'Голосовать', name: 'vote', sort: false, type: 'vote' },
+          { title: 'Сумма', name: 'amount', sort: false, type: 'text' },
+          { title: 'Описание заявки', name: 'description', sort: false, type: 'infolink' },
+          { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink' },
+          { title: 'Дата заявки', name: 'applySince', sort: false, type: 'text' },
+          { title: 'Дата окончания', name: 'endDate', sort: false, type: 'text' },
+          { title: 'Количество голосов', name: 'numberOfVotes', sort: false, type: 'text' }
+        ];
+      };
+
       //this.model.account = accounts[0];
       this.refreshData();
       this.isLoaded = true;
@@ -114,6 +143,7 @@ export class ProposalComponent {
 
     try {
 
+      debugger;
 
       this.members = await this.dacoService.getProposals();
       this.tableComponent.refreshData(this.members);

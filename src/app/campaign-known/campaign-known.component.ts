@@ -30,10 +30,10 @@ export class CampaignKnownComponent {
 
 
   columns: Array<any> = [
-    { title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
+    //{ title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
     //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
     { title: 'Сумма', name: 'amount', sort: false, type: 'text'},
-    { title: 'Описание кампании', name: 'description', sort: false, type: 'text' },
+    { title: 'Описание кампании', name: 'description', sort: false, type: 'infoknown' },
     { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink'},
     { title: 'Дата заявки', name: 'proposalSince', sort: false, type: 'text' },
     { title: 'Дата кампании', name: 'campaignSince', sort: false, type: 'text' },
@@ -74,6 +74,7 @@ export class CampaignKnownComponent {
   async ngOnInit() {
 
     await this.dacoService.setupDacoContract();
+    await this.dacoService.test;
     await this.refreshData();
 
 

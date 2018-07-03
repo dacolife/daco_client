@@ -59,6 +59,7 @@ export class HomeComponent {
 
  async ngOnInit()  {
    await this.dacoService.setupDacoContract();
+   await this.dacoService.test;
    await this.refreshData();
     this.watchAccount();
  

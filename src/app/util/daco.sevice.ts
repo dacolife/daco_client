@@ -24,12 +24,13 @@ declare let window: any;
 export class DacoService {
 
   private web3: any;
+  public test: any = null;
   private accounts: string[];
   public ready = false;
   public DacoInstance: any;
   public accountsObservable = new Subject<string[]>();
   public seriveceObservable = new Subject<string>();
-  private deployedDaco = null;
+  public deployedDaco = null;
 
   public isLoaded: boolean = false;
 
@@ -54,6 +55,7 @@ export class DacoService {
     //var ewr = daco_artifacts;
     this.web3 = web3Service.web3;
     // alert(1);
+    this.setupDacoContract();
     this.watchAccount();
 
   };
@@ -62,7 +64,11 @@ export class DacoService {
 
   public async setupDacoContract() {
 
-    this.deployedDaco = await this.web3Service.DacoInstance.deployed();
+   // this.deployedDaco = await this.web3Service.DacoInstance.deployed().than(() => resul);
+    this.test= this.web3Service.DacoInstance.deployed()
+      .then((DacoAbstraction) => {
+        this.deployedDaco = DacoAbstraction;
+      });
     // this.metaCoinInstance = await this.web3Service.MetaCoin.deployed();
     //this.deployedDaco = await this.DacoInstance.deployed();
     this.seriveceObservable.next('6666');
@@ -91,10 +97,11 @@ export class DacoService {
 
   watchAccount() {
     this.web3Service.accountsObservable.subscribe((accounts) => {
+     
       this.accounts = accounts;
-      console.log("watch account");
+      console.log("watch account. daco service");
        this.accountsObservable.next(accounts);
-      this.setupDacoContract();
+      //this.setupDacoContract();
 
     });
   }
@@ -207,22 +214,13 @@ export class DacoService {
         var address = await this.deployedDaco.membersAddr(i); //узнать адрес по номеру участника
 
         var data = await this.deployedDaco.getMember(address); //узнать инфу участника по адресу
-        //this.deployedDaco.getMember(address, function (error, data) {//узнать инфу участника по адресу
+        var member = await this.getMember(address); {//узнать инфу участника по адресу
 
-        members.push({
-          status: data[0] ? "Может голосовать" : "Не голосует",
-          name: data[2],
-          link: data[3] ? data[3].slice(0, 4) == "http" ? data[3] : "http://" + data[3] : data[3],
-          // link: data[3].indexOf("http://")<0||data[3].indexOf("https://")<0 ? data[3] : "http://"+data[3]  ,
-          memmberSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
-          memmberSince1: +data[4].c[0],
-          campaignNew: data[5].c[0],
-          campaignCompleted: data[6].c[0]
-        });
+          members.push(member);
 
 
-      };
-
+        };
+      }
       return members;
 
 
@@ -244,11 +242,11 @@ export class DacoService {
       var numProposals = await this.deployedDaco.numProposals();//узнать число участников
       var items: any[] = [];
       for (var i = 0; i < numProposals.c[0]; i++) {
-        var address = await this.deployedDaco.proposalsHash(i); //узнать адрес по номеру участника
+        var hash = await this.deployedDaco.proposalsHash(i); //узнать адрес по номеру участника
 
 
-        var dat = await this.deployedDaco.getCampaignCommonInfo(address); //узнать инфу участника по адресу
-        var data = await this.deployedDaco.getCampaignProposalInfo(address); //узнать инфу участника по адресу
+        var dat = await this.deployedDaco.getCampaignCommonInfo(hash); //узнать инфу участника по адресу
+        var data = await this.deployedDaco.getCampaignProposalInfo(hash); //узнать инфу участника по адресу
 
 
 
@@ -264,7 +262,8 @@ export class DacoService {
           endDate: new Date(dat[4].c[0] * 1000).toLocaleString("ru"),
           applySinceForCompare: +data[4].c[0],
           numberOfVotes: data[3].c[0],
-          number: i
+          number: i,
+          hash: hash
 
         });
 
@@ -272,6 +271,42 @@ export class DacoService {
       };
 
       return items;
+
+
+    } catch (e) {
+      console.log(e);
+      //this.setStatus('Error getting balance; see log.');
+    }
+
+
+  }
+
+  async getProposalInfo(hash) {
+
+    try {
+
+        var dat = await this.deployedDaco.getCampaignCommonInfo(hash); //узнать инфу участника по адресу
+        var data = await this.deployedDaco.getCampaignProposalInfo(hash); //узнать инфу участника по адресу
+
+
+      //will be changed to typescript objects
+      var item = {
+
+          addressOwner: dat[3],
+          //addressWallet: dat[4],
+          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
+          description: dat[6],
+          link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
+          // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
+          applySince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+          endDate: new Date(dat[4].c[0] * 1000).toLocaleString("ru"),
+          applySinceForCompare: +data[4].c[0],
+          numberOfVotes: data[3].c[0],
+          hash: hash
+
+        };
+
+      return item;
 
 
     } catch (e) {
@@ -326,11 +361,11 @@ export class DacoService {
       var numProposals = await this.deployedDaco.numCampaigns();//узнать число участников
       var items: any[] = [];
       for (var i = 0; i < numProposals.c[0]; i++) {
-        var address = await this.deployedDaco.campaignsHash(i); //узнать адрес по номеру участника
+        var hash = await this.deployedDaco.campaignsHash(i); //узнать адрес по номеру участника
 
 
-        var dat = await this.deployedDaco.getCampaignCommonInfo(address); //узнать инфу участника по адресу
-        var data = await this.deployedDaco.getCampaignActiveInfo(address); //узнать инфу участника по адресу
+        var dat = await this.deployedDaco.getCampaignCommonInfo(hash); //узнать инфу участника по адресу
+        var data = await this.deployedDaco.getCampaignActiveInfo(hash); //узнать инфу участника по адресу
 
 
 
@@ -346,7 +381,8 @@ export class DacoService {
           proposalSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
           proposalSinceForCompare: +data[4].c[0],
           endDate: new Date(dat[4].c[0] * 1000).toLocaleString("ru"),
-          campaignSince: data[5].c[0] ? new Date(data[5].c[0] * 1000).toLocaleString("ru") : "Неизвестна"
+          campaignSince: data[5].c[0] ? new Date(data[5].c[0] * 1000).toLocaleString("ru") : "Неизвестна",
+          hash: hash
         });
       };
 
@@ -360,6 +396,45 @@ export class DacoService {
 
 
   }
+
+  async getСampaignKnownInfo(hash) {
+
+    try {
+
+  
+      
+
+      var dat = await this.deployedDaco.getCampaignCommonInfo(hash); //узнать инфу участника по адресу
+      var data = await this.deployedDaco.getCampaignActiveInfo(hash); //узнать инфу участника по адресу
+
+
+
+      var  item={
+          addressOwner: dat[3],
+          //addressWallet: dat[4],
+          //amount: dat[5].c[0],
+          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
+          description: dat[6],
+          link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
+          // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
+          proposalSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+          proposalSinceForCompare: +data[4].c[0],
+          endDate: new Date(dat[4].c[0] * 1000).toLocaleString("ru"),
+          campaignSince: data[5].c[0] ? new Date(data[5].c[0] * 1000).toLocaleString("ru") : "Неизвестна"
+        };
+    
+
+      return item;
+
+
+    } catch (e) {
+      console.log(e);
+      //this.setStatus('Error getting balance; see log.');
+    }
+
+
+  }
+
 
   async getСampaignCompleted() {
 
@@ -468,5 +543,42 @@ export class DacoService {
 
 
   }
+
+
+
+  async getMember  (address) {
+
+    try {
+
+
+
+
+
+
+      var data = await this.deployedDaco.getMember(address); //узнать инфу участника по адресу
+      //debugger;
+      var member={
+        status: data[0] ? "Может голосовать" : "Не голосует",
+        isMember: data[1],
+        name: data[2],
+        link: data[3] ? data[3].slice(0, 4) == "http" ? data[3] : "http://" + data[3] : data[3],
+        // link: data[3].indexOf("http://")<0||data[3].indexOf("https://")<0 ? data[3] : "http://"+data[3]  ,
+        memmberSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+        memmberSince1: +data[4].c[0],
+        campaignNew: data[5].c[0],
+        campaignCompleted: data[6].c[0]
+      };
+
+      return member;
+
+
+    } catch (e) {
+      console.log(e);
+
+    }
+
+
+  }
+
 
 }

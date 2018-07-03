@@ -1,2 +1,100 @@
+<div class="row">
+  <div class="col-lg-10">
+    <h1 class="page-header">Заявка кампании</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
 
-<dacotable [columns]="columns" [ng2TableData]="members"></dacotable>
+
+
+<div class="row">
+  <div class="col-lg-6">
+    <section class="widget" widget>
+      <header>
+        <h6></h6>
+        <div class="widget-controls">
+          <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
+          <a href="#"><i class="fa fa-refresh"></i></a>
+          <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+        </div>
+      </header>
+      <div class="widget-body">
+        <form class="form-horizontal" role="form">
+          <fieldset *ngIf="campaignInfo">
+
+            <!--{ title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
+  //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
+  { title: 'Сумма', name: 'amount', sort: false, type: 'text'},
+  { title: 'Описание заявки', name: 'description', sort: false, type: 'infolink'},
+  { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink' },
+  { title: 'Дата заявки', name: 'applySince', sort: false, type: 'text' },
+  { title: 'Дата окончания', name: 'endDate', sort: false, type: 'text'},
+  { title: 'Количество голосов', name: 'numberOfVotes', sort: false, type: 'text' }-->
+
+
+            <legend>Заявка<strong> кампании</strong> </legend>
+            <div class="form-group row">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Адрес завителя</label>
+              <div class="col-md-7 ">
+                <input disabled="disabled" type="text" id="normal-field" class="form-control" [(ngModel)]="campaignInfo.addressOwner" name="addressOwner" placeholder="Адрес завителя">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Сумма которую необходимо набрать</label>
+              <div class="col-md-7 ">
+                <input disabled="disabled" type="text" id="normal-field" class="form-control" [(ngModel)]="campaignInfo.amount" name="amount" placeholder="Адрес завителя">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Описание заявки</label>
+              <div class="col-md-7 ">
+                <input disabled="disabled" type="text" id="normal-field" class="form-control" [(ngModel)]="campaignInfo.description" name="description" placeholder="На что необходимы средства">
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="campaignInfo.link">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Ссылка</label>
+              <div class="col-md-7 ">
+
+                <a href="{{campaignInfo.link}}" target="_blank" title="{{campaignInfo.link}}">{{campaignInfo.link}}</a>
+               
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="campaignInfo.applySince">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Дата заявки</label>
+              <div class="col-md-7 ">
+                <input disabled="disabled" type="text" id="normal-field" class="form-control" [(ngModel)]="campaignInfo.applySince" name="applySince" placeholder="Адрес завителя">
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="campaignInfo.campaignSince">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Дата заявки</label>
+              <div class="col-md-7 ">
+                <input disabled="disabled" type="text" id="normal-field" class="form-control" [(ngModel)]="campaignInfo.campaignSince" name="campaignSince" placeholder="Адрес завителя">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Дата окончания</label>
+              <div class="col-md-7 ">
+                <input disabled="disabled" type="text" id="normal-field" class="form-control" [(ngModel)]="campaignInfo.endDate" name="endDate" placeholder="Адрес завителя">
+              </div>
+            </div>
+
+            <div class="form-group row" *ngIf="campaignInfo.numberOfVotes">
+              <label for="normal-field" class="col-md-4  col-form-label text-md-right">Количество голосов</label>
+              <div class="col-md-7 ">
+                <input disabled="disabled" type="text" id="normal-field" class="form-control" [(ngModel)]="campaignInfo.numberOfVotes" name="numberOfVotes" placeholder="Адрес завителя">
+              </div>
+            </div>
+
+          </fieldset>
+
+
+   
+
+        </form>
+      </div>
+    </section>
+  </div>
+
+
+</div>
