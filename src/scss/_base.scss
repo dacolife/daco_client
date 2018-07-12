@@ -1021,11 +1021,11 @@ app, .app {
 }
 
 .widget-sm{
-  height: 230px;
+  height: 200px;
 }
 
 .widget-md{
-  height: 373px;
+  height: 300px;
 }
 
 .widget-padding-md {
@@ -1092,4 +1092,8 @@ app, .app {
   background:  rgba($white, .4);
   border: 1px dashed $gray-600;
   margin: -1px -1px calc(#{$grid-gutter-width} - 1px) -1px;
+}
+
+.link {
+  cursor: pointer;
 }

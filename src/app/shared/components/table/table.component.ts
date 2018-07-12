@@ -95,11 +95,11 @@ export class TableComponent {
   }
 
   async ngOnInit() {
-  
-    this.dacoService.setupDacoContract();
+
+    await this.dacoService.setupDacoContract();
     await this.dacoService.test;
     var members = await this.dacoService.getMembers();
-    debugger;
+    //debugger;
     this.watchAccount();
   
     //await this.refreshData();

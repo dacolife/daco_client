@@ -44,16 +44,13 @@ export class MemberComponent {
 
   rows: Array<any> = [];
   columns: Array<any> = [
-    { title: 'Статус', name: 'status', sort: false,type:'text' },
-    { title: 'Имя', name: 'name', sort: false, type: 'text'},
-    { title: 'ССЫЛКА УЧАСТНИКА', name: 'link', sort: false, type: 'descriptionlink'},
-    { title: 'ДАТА РЕГИСТРАЦИИ', name: 'memmberSince', sort: false, type: 'text'},
-    { title: 'ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ', name: 'campaignCompleted', sort: false, type: 'text' },
-    { title: 'ЗАВЕРШЕННЫЕ КАМПАНИИ', name: 'campaignNew', sort: false, type: 'text'}
-   
-  
- 
+    { title: 'Делегат', name: 'name', link: 'link', sort: false, type: 'memberLink'},
+    { title: 'Адрес кошелька', address: 'address', sort: false, type: 'addressLink'},
+    { title: 'Дата регистрации', name: 'memberSince', sort: false, type: 'text' },
+    { title: 'Верифицировано', name: 'campaignCompleted', sort: false, type: 'text' },
+    { title: 'Завершено', name: 'campaignNew', sort: false, type: 'text'}
   ];
+
   page: number = 1;
   itemsPerPage: number = 10;
   maxSize: number = 5;
@@ -99,6 +96,12 @@ export class MemberComponent {
   }
 
   async ngOnInit()  {
+
+    // console.log("START TEST");
+    // await this.dacoService.ttt();
+    // console.log("AFTER await", this.dacoService.tDaco);
+
+
     //console.log('OnInit: ' + this);
     //console.log(this);
     await this.dacoService.setupDacoContract();
@@ -156,7 +159,7 @@ export class MemberComponent {
 
 
       this.members = await this.dacoService.getMembers();
-      console.log('Refreshing data');
+      console.log('Refreshing data', this.members);
       this.ng2TableData = this.members;
       this.onChangeTable(this.config);
 

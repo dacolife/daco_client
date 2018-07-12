@@ -7,11 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StatsComponent implements OnInit {
 
-  //[number]="666" [comments]="'ДЕЛЕГАТЫ'" [colour]="primary" [type]="globe"
   @Input()  number: number = 777;
   @Input()  colour: string = 'bg-warning';
   @Input()  type: string = 'fa-check';
   @Input()  comments: string = 'Делегаты 66';
+  @Input()  route: string;
 
 
   constructor() { }

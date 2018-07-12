@@ -60,21 +60,42 @@ export class DacoService {
 
   };
 
+  public tDaco: any;
+
+  public async ttt() {
+    console.log("run ttt");
+    return this.pF().then((r) => {
+        console.log("set tDaco");
+        this.tDaco = r;
+    });
+  }
+
+  private pF() {
+      console.log("run pF");
+      return new Promise((resolve, reject) => {
+          console.log("run setTimeout");
+          setTimeout(() => {
+            console.log("run resolve");
+            resolve(77);
+          }, 10000);
+      })
+  }
+
 
 
   public async setupDacoContract() {
 
    // this.deployedDaco = await this.web3Service.DacoInstance.deployed().than(() => resul);
-    this.test= this.web3Service.DacoInstance.deployed()
+    return this.web3Service.DacoInstance.deployed()
       .then((DacoAbstraction) => {
         this.deployedDaco = DacoAbstraction;
       });
     // this.metaCoinInstance = await this.web3Service.MetaCoin.deployed();
     //this.deployedDaco = await this.DacoInstance.deployed();
-    this.seriveceObservable.next('6666');
+    //this.seriveceObservable.next('6666');
 
 
-    this.isLoaded = true;
+    //this.isLoaded = true;
 
 
 
@@ -557,14 +578,15 @@ export class DacoService {
 
       var data = await this.deployedDaco.getMember(address); //узнать инфу участника по адресу
       //debugger;
-      var member={
+      var member = {
         status: data[0] ? "Может голосовать" : "Не голосует",
+        address: address,
         isMember: data[1],
         name: data[2],
         link: data[3] ? data[3].slice(0, 4) == "http" ? data[3] : "http://" + data[3] : data[3],
         // link: data[3].indexOf("http://")<0||data[3].indexOf("https://")<0 ? data[3] : "http://"+data[3]  ,
-        memmberSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
-        memmberSince1: +data[4].c[0],
+        memberSince: new Date(data[4].c[0] * 1000).toLocaleString("ru"),
+        memberSince1: +data[4].c[0],
         campaignNew: data[5].c[0],
         campaignCompleted: data[6].c[0]
       };

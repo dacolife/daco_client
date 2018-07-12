@@ -9,17 +9,17 @@
 <div class="row">
 
   <div class="col-lg-3 col-md-6">
-    <stats number="{{counts.Members}}" colour="bg-primary" type="fa-globe" comments="Делегаты"></stats>
+    <stats number="{{counts.Members}}" colour="bg-primary" type="fa-globe" comments="Делегаты" route="/app/member"></stats>
   </div>
   <div class="col-lg-3 col-md-6">
-    <stats number="{{counts.Proposal}}" colour="bg-danger" type="fa-bell-o" comments="КАМПАНИИ ОЖИДАЮЩИЕ ВЕРИФИКАЦИИ"></stats>
+    <stats number="{{counts.Proposal}}" colour="bg-danger" type="fa-bell-o" comments="Сборы ожидают верификации" route="/app/proposal"></stats>
   </div>
   <div class="col-lg-3 col-md-6">
-    <stats number="{{counts.CampaignKnown}}" colour="bg-success" type="fa-check" comments="ВЕРИФИЦИРОВАННЫЕ КАМПАНИИ"></stats>
+    <stats number="{{counts.CampaignKnown}}" colour="bg-success" type="fa-check" comments="Активные сборы" route="/app/campaignKnown"></stats>
   </div>
 
   <div class="col-lg-3 col-md-6">
-    <stats number="{{counts.CampaignCompleted}}" colour="bg-warning" type="fa-coffee" comments="ЗАВЕРШЕННЫЕ КАМПАНИИ"></stats>
+    <stats number="{{counts.CampaignCompleted}}" colour="bg-warning" type="fa-coffee" comments="Завершенные сборы" route="/app/campaignCompleted"></stats>
   </div>
 
 
@@ -84,7 +84,7 @@
                       <!--<td>{{info.status}}</td>
                       <td>{{info.name}}</td>
                       <td><a href="{{info.link}}" target="_blank" title="{{info.link}}">{{info.link}}</a></td>
-                      <td>{{info.memmberSince}}</td>
+                      <td>{{info.memberSince}}</td>
                       <td>{{info.campaignNew}}</td>
                       <td>{{info.campaignCompleted}}</td>-->
                     </tr>

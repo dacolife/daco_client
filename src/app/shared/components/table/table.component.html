@@ -25,9 +25,10 @@
           <tr *ngFor="let item of mf.data">
             <td *ngFor="let col of columns" class="text-left" [ngSwitch]="col.type">
               <button *ngSwitchCase="'vote'" type="submit" class="btn btn-primary">Голосовать</button>
-              <a *ngSwitchCase="'link'" href="https://rinkeby.etherscan.io/address/{{item.addressOwner}}" target="_blank"
-                 title="{{item[col.name]}}">{{item[col.name]}}...</a>
-              <a *ngSwitchCase="'descriptionlink'" href="{{item[col.name]}}" target="_blank" title="{{item[col.name]}}">{{item[col.name]}}</a>
+              <a *ngSwitchCase="'addressLink'" href="https://rinkeby.etherscan.io/address/{{item[col.address]}}" target="_blank"
+                 title="{{item[col.address]}}">{{ (item[col.address].length>6)? (item[col.address] | slice:0:10)+'...':(item[col.address]) }}</a>
+              <a *ngSwitchCase="'memberLink'" href="{{item[col.link]}}" target="_blank" title="{{item[col.name]}}">{{item[col.name]}}</a>
+              <a *ngSwitchCase="'descriptionlink'" href="{{item[col.name]}}" target="_blank" title="{{item[col.name]}}">link</a>
               <!--need to add types to typescript enums-->
               <a *ngSwitchCase="'infolink'" [routerLink]=" ['../../campaignInfo'] " [queryParams]="{hash: item.hash,type:'proposal'}" title="{{item[col.name]}}">{{item[col.name]}}</a>
               <a *ngSwitchCase="'infoknown'" [routerLink]=" ['../../campaignInfo'] " [queryParams]="{hash: item.hash,type:'known'}" title="{{item[col.name]}}">{{item[col.name]}}</a>
