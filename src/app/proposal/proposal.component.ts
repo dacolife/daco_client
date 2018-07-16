@@ -23,7 +23,7 @@ export class StatsViewModel {
 
 export class Counts {
 
-  public Members: number = 0;
+  public items: number = 0;
   public Proposal: number = 0;
   public CampaignKnown: number = 0;
   public CampaignCompleted: number = 0;
@@ -48,15 +48,11 @@ export class ProposalComponent {
 
 
   columns: Array<any> = [
-    //{ title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
-    //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
-   // { title: 'Голосовать', name: 'vote', sort: false, type: 'text' },
-    { title: 'Сумма', name: 'amount', sort: false, type: 'text'},
-    { title: 'Описание заявки', name: 'description', sort: false, type: 'infolink'},
-    { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink' },
-    { title: 'Дата заявки', name: 'applySince', sort: false, type: 'text' },
-    { title: 'Дата окончания', name: 'endDate', sort: false, type: 'text'},
-    { title: 'Количество голосов', name: 'numberOfVotes', sort: false, type: 'text' }
+    { title: 'Amount ETH', name: 'amount', sort: false, type: 'text'},
+    { title: 'Description', name: 'description', sort: false, type: 'infolink'},
+    { title: 'Link', name: 'link', sort: false, type: 'descriptionlink' },
+    { title: 'Application date', name: 'applySince', sort: false, type: 'text' },
+    { title: 'Finish date', name: 'endDate', sort: false, type: 'text'}
   ];
   page: number = 1;
   itemsPerPage: number = 10;
@@ -71,7 +67,7 @@ export class ProposalComponent {
   };
 
   accounts: string[];
-  members: any[] = [];
+  items: any[] = [];
   isLoaded: boolean = false;
   countsView: StatsViewModel[];
 
@@ -92,9 +88,8 @@ export class ProposalComponent {
   }
 
   async ngOnInit() {
-
-    
-    this.dacoService.setupDacoContract();
+    await this.dacoService.setupDacoContract();
+    await this.refreshData();
     this.watchAccount();
 
     //await this.refreshData();
@@ -105,8 +100,8 @@ export class ProposalComponent {
   watchAccount() {
     this.dacoService.accountsObservable.subscribe(async (accounts) => {
       this.accounts = accounts;
-      await this.dacoService.test;
-      var member = await this.dacoService.getMember(this.accounts[0]);
+      //await this.dacoService.test;
+      //var member = await this.dacoService.getMember(this.accounts[0]);
       //var isMember =
 
         
@@ -115,20 +110,9 @@ export class ProposalComponent {
       //this.ng2TableData = this.tableData;
       var isMember = member.isMember;
 
-      if (isMember)
-      {
-        this.columns =[
-          //{ title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
-          //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
-          { title: 'Голосовать', name: 'vote', sort: false, type: 'vote' },
-          { title: 'Сумма', name: 'amount', sort: false, type: 'text' },
-          { title: 'Описание заявки', name: 'description', sort: false, type: 'infolink' },
-          { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink' },
-          { title: 'Дата заявки', name: 'applySince', sort: false, type: 'text' },
-          { title: 'Дата окончания', name: 'endDate', sort: false, type: 'text' },
-          { title: 'Количество голосов', name: 'numberOfVotes', sort: false, type: 'text' }
-        ];
-      };
+      if (isMember) {
+        this.columns.push({ title: 'Vote', name: 'vote', sort: false, type: 'vote'});
+      }
 
       //this.model.account = accounts[0];
       this.refreshData();
@@ -142,14 +126,9 @@ export class ProposalComponent {
 
 
     try {
-
-      debugger;
-
-      this.members = await this.dacoService.getProposals();
-      this.tableComponent.refreshData(this.members);
-      console.log('Refreshing data');
-
-
+      this.items = await this.dacoService.getProposals();
+      console.log('Refreshing data items=', this.items);
+      this.tableComponent.refreshData(this.items);
     } catch (e) {
       console.log(e);
       //this.setStatus('Error getting balance; see log.');

@@ -403,6 +403,7 @@ export class DacoService {
           proposalSinceForCompare: +data[4].c[0],
           endDate: new Date(dat[4].c[0] * 1000).toLocaleString("ru"),
           campaignSince: data[5].c[0] ? new Date(data[5].c[0] * 1000).toLocaleString("ru") : "Неизвестна",
+          donationContract: data[6],
           hash: hash
         });
       };
@@ -520,7 +521,9 @@ export class DacoService {
           // link: data[0].indexOf("http://")<0||data[0].indexOf("https://")<0 ?  data[0] :"http://"+data[0],
           campaignSince: data[2].c[0] ? new Date(data[2].c[0] * 1000).toLocaleString("ru") : "Неизвестна",
           campaignUntil: data[3].c[0] ? new Date(data[3].c[0] * 1000).toLocaleString("ru") : "Неизвестна",
-          finishedAmount: data[4].c[0] ? data[4].c[0] : "Неизвестно"
+          finishedAmount: data[4].c[0] ? data[4].c[0] : "Неизвестно",
+          report: data[5],
+          donationContract: data[6]
         });
       };
 

@@ -44,11 +44,11 @@ export class MemberComponent {
 
   rows: Array<any> = [];
   columns: Array<any> = [
-    { title: 'Делегат', name: 'name', link: 'link', sort: false, type: 'memberLink'},
-    { title: 'Адрес кошелька', address: 'address', sort: false, type: 'addressLink'},
-    { title: 'Дата регистрации', name: 'memberSince', sort: false, type: 'text' },
-    { title: 'Верифицировано', name: 'campaignCompleted', sort: false, type: 'text' },
-    { title: 'Завершено', name: 'campaignNew', sort: false, type: 'text'}
+    { title: 'Member', name: 'name', link: 'link', sort: false, type: 'memberLink'},
+    { title: 'ETH address', address: 'address', sort: false, type: 'addressLink'},
+    { title: 'Registered', name: 'memberSince', sort: false, type: 'text' },
+    { title: 'Verified campaigns', name: 'campaignCompleted', sort: false, type: 'text' },
+    { title: 'Finished campaigns', name: 'campaignNew', sort: false, type: 'text'}
   ];
 
   page: number = 1;

@@ -2,24 +2,24 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">Главная</h1>
+    <h1 class="page-header">Home</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
 <div class="row">
 
   <div class="col-lg-3 col-md-6">
-    <stats number="{{counts.Members}}" colour="bg-primary" type="fa-globe" comments="Делегаты" route="/app/member"></stats>
+    <stats number="{{counts.Members}}" colour="bg-primary" type="fa-users" comments="Members" route="/app/member"></stats>
   </div>
   <div class="col-lg-3 col-md-6">
-    <stats number="{{counts.Proposal}}" colour="bg-danger" type="fa-bell-o" comments="Сборы ожидают верификации" route="/app/proposal"></stats>
+    <stats number="{{counts.Proposal}}" colour="bg-danger" type="fa-balance-scale" comments="Unverified campaigns" route="/app/proposal"></stats>
   </div>
   <div class="col-lg-3 col-md-6">
-    <stats number="{{counts.CampaignKnown}}" colour="bg-success" type="fa-check" comments="Активные сборы" route="/app/campaignKnown"></stats>
+    <stats number="{{counts.CampaignKnown}}" colour="bg-success" type="fa-check" comments="Active campaigns" route="/app/campaignKnown"></stats>
   </div>
 
   <div class="col-lg-3 col-md-6">
-    <stats number="{{counts.CampaignCompleted}}" colour="bg-warning" type="fa-coffee" comments="Завершенные сборы" route="/app/campaignCompleted"></stats>
+    <stats number="{{counts.CampaignCompleted}}" colour="bg-warning" type="fa-clock-o" comments="Finished campaigns" route="/app/campaignCompleted"></stats>
   </div>
 
 
@@ -30,81 +30,81 @@
 
 
 
-<div class="row">
-  <div class="col-lg-12">
-    <!--<div class="panel panel-default">-->
-    <!--<div class="panel-heading">
-        Здесь Вы можете узнать более подробную информацию о кампаниях
-    </div>-->
-    <!-- /.panel-heading -->
-    <div class="panel-body">
-      <p>Здесь Вы можете узнать более подробную информацию о кампаниях</p>
+<!--<div class="row">-->
+  <!--<div class="col-lg-12">-->
+    <!--&lt;!&ndash;<div class="panel panel-default">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="panel-heading">-->
+        <!--Здесь Вы можете узнать более подробную информацию о кампаниях-->
+    <!--</div>&ndash;&gt;-->
+    <!--&lt;!&ndash; /.panel-heading &ndash;&gt;-->
+    <!--<div class="panel-body">-->
+      <!--<p>Здесь Вы можете узнать более подробную информацию о кампаниях</p>-->
 
-      <input type="text" id="txt"
-             ng-model="FromUser"
-             value=""
-             placeholder=" Введите адрес делегата"
-             ng-keyup="inputSubmit(FromUser)"
-             style="   width: 45%;
-                                 outline: none;
-                                 background: #fff;
-                                 border-radius: 25px;
-                                 border: 1px solid #a8a8a8;
-                                 margin: 5px 10px 5px 0;
-                                 padding: 6px;
-                                 vertical-align: middle;" />
-      <button type="submit" id="send" class="btn btn-group-sm btn-primary" ng-click="checkAddress(FromUser)"
-              style="border-radius: 30px;
-                                outline: none;
-                                padding: 6px 12px;
-                                margin: 5px 0;
-                                ">
-        Поиск
-      </button>
+      <!--<input type="text" id="txt"-->
+             <!--ng-model="FromUser"-->
+             <!--value=""-->
+             <!--placeholder=" Введите адрес делегата"-->
+             <!--ng-keyup="inputSubmit(FromUser)"-->
+             <!--style="   width: 45%;-->
+                                 <!--outline: none;-->
+                                 <!--background: #fff;-->
+                                 <!--border-radius: 25px;-->
+                                 <!--border: 1px solid #a8a8a8;-->
+                                 <!--margin: 5px 10px 5px 0;-->
+                                 <!--padding: 6px;-->
+                                 <!--vertical-align: middle;" />-->
+      <!--<button type="submit" id="send" class="btn btn-group-sm btn-primary" ng-click="checkAddress(FromUser)"-->
+              <!--style="border-radius: 30px;-->
+                                <!--outline: none;-->
+                                <!--padding: 6px 12px;-->
+                                <!--margin: 5px 0;-->
+                                <!--">-->
+        <!--Поиск-->
+      <!--</button>-->
 
-      <div class="row"
-           style="margin-top: 15px">
-        <div class="col-lg-12">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th width="10%">Статус</th>
-                      <th width="10%">Имя</th>
-                      <th width="17%">Ссылка участника</th>
-                      <th width="15%">Дата регистрации</th>
-                      <th width="23%">Верифицированные кампании</th>
-                      <th width="20%">Завершенные кампании</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <!--<td>{{info.status}}</td>
-                      <td>{{info.name}}</td>
-                      <td><a href="{{info.link}}" target="_blank" title="{{info.link}}">{{info.link}}</a></td>
-                      <td>{{info.memberSince}}</td>
-                      <td>{{info.campaignNew}}</td>
-                      <td>{{info.campaignCompleted}}</td>-->
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+      <!--<div class="row"-->
+           <!--style="margin-top: 15px">-->
+        <!--<div class="col-lg-12">-->
+          <!--<div class="panel panel-default">-->
+            <!--<div class="panel-body">-->
+              <!--<div class="table-responsive">-->
+                <!--<table class="table">-->
+                  <!--<thead>-->
+                    <!--<tr>-->
+                      <!--<th width="10%">Статус</th>-->
+                      <!--<th width="10%">Имя</th>-->
+                      <!--<th width="17%">Ссылка участника</th>-->
+                      <!--<th width="15%">Дата регистрации</th>-->
+                      <!--<th width="23%">Верифицированные кампании</th>-->
+                      <!--<th width="20%">Завершенные кампании</th>-->
+                    <!--</tr>-->
+                  <!--</thead>-->
+                  <!--<tbody>-->
+                    <!--<tr>-->
+                      <!--&lt;!&ndash;<td>{{info.status}}</td>-->
+                      <!--<td>{{info.name}}</td>-->
+                      <!--<td><a href="{{info.link}}" target="_blank" title="{{info.link}}">{{info.link}}</a></td>-->
+                      <!--<td>{{info.memberSince}}</td>-->
+                      <!--<td>{{info.campaignNew}}</td>-->
+                      <!--<td>{{info.campaignCompleted}}</td>&ndash;&gt;-->
+                    <!--</tr>-->
+                  <!--</tbody>-->
+                <!--</table>-->
+              <!--</div>-->
 
-            </div>
-          </div>
+            <!--</div>-->
+          <!--</div>-->
 
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 
-<div class="row" style="color: #ff1400">
-  <p>*Такого адреса делегата нет в нашей базе. Введите другой адрес.</p>
-</div>
+<!--<div class="row" style="color: #ff1400">-->
+  <!--<p>*Такого адреса делегата нет в нашей базе. Введите другой адрес.</p>-->
+<!--</div>-->
 <!--
     /.panel
    <div class="row">

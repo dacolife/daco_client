@@ -30,14 +30,12 @@ export class CampaignKnownComponent {
 
 
   columns: Array<any> = [
-    //{ title: 'Заявитель', name: 'addressOwner', sort: false, type: 'link' },
-    //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
-    { title: 'Сумма', name: 'amount', sort: false, type: 'text'},
-    { title: 'Описание кампании', name: 'description', sort: false, type: 'infoknown' },
-    { title: 'Ссылка', name: 'link', sort: false, type: 'descriptionlink'},
-    { title: 'Дата заявки', name: 'proposalSince', sort: false, type: 'text' },
-    { title: 'Дата кампании', name: 'campaignSince', sort: false, type: 'text' },
-    { title: 'Дата окончания', name: 'endDate', sort: false, type: 'text' }
+    { title: 'Amount ETH', name: 'amount', sort: false, type: 'text'},
+    { title: 'Description', name: 'description', sort: false, type: 'infoknown' },
+    { title: 'Link', name: 'link', sort: false, type: 'descriptionlink'},
+    { title: 'Date', name: 'campaignSince', sort: false, type: 'text' },
+    { title: 'Finish date', name: 'endDate', sort: false, type: 'text' },
+    { title: 'Address', address: 'donationContract', sort: false, type: 'addressLink' }
   ];
   page: number = 1;
   itemsPerPage: number = 10;
@@ -52,7 +50,7 @@ export class CampaignKnownComponent {
   };
 
   accounts: string[];
-  members: any[] = [];
+  items: any[] = [];
   isLoaded: boolean = false;
 
 
@@ -74,7 +72,7 @@ export class CampaignKnownComponent {
   async ngOnInit() {
 
     await this.dacoService.setupDacoContract();
-    await this.dacoService.test;
+    //await this.dacoService.test;
     await this.refreshData();
 
 
@@ -97,9 +95,9 @@ export class CampaignKnownComponent {
     try {
 
 
-      this.members = await this.dacoService.getСampaignKnown();
-      this.tableComponent.refreshData(this.members);
-      console.log('Refreshing data');
+      this.items = await this.dacoService.getСampaignKnown();
+      console.log('Refreshing data items=', this.items);
+      this.tableComponent.refreshData(this.items);
 
 
     } catch (e) {

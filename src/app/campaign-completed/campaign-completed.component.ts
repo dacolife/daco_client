@@ -30,14 +30,12 @@ export class CampaignCompletedComponent {
 
 
   columns: Array<any> = [
-    //{ title: 'Заявитель', name: 'addressOwner', sort: false,type:'link' },
-    //{ title: 'Кошелек для сборя средств', name: 'addressWallet', sort: false },
-    { title: 'Сумма', name: 'amount', sort: false, type: 'text' },
-    { title: 'Описание кампании', name: 'description', sort: false, type: 'text'},
-    { title: 'Ссылка', name: 'link', sort: false,type: 'descriptionlink' },
-    { title: 'Дата кампании', name: 'campaignSince', sort: false, type: 'text'},
-    { title: 'Дата закрытия', name: 'campaignUntil', sort: false, type: 'text'},
-    { title: 'Всего собрано', name: 'finishedAmount', sort: false, type: 'text'},
+    { title: 'Amount ETH', name: 'amount', sort: false, type: 'text' },
+    { title: 'Description', name: 'description', sort: false, type: 'text'},
+    { title: 'Link', name: 'link', sort: false,type: 'descriptionlink' },
+    { title: 'Date', name: 'campaignSince', sort: false, type: 'text'},
+    { title: 'Finish date', name: 'campaignUntil', sort: false, type: 'text'},
+    { title: 'Report', name: 'report', sort: false, type: 'descriptionlink'}
   ];
   page: number = 1;
   itemsPerPage: number = 10;
@@ -52,7 +50,7 @@ export class CampaignCompletedComponent {
   };
 
   accounts: string[];
-  members: any[] = [];
+  items: any[] = [];
   isLoaded: boolean = false;
 
 
@@ -97,9 +95,9 @@ export class CampaignCompletedComponent {
     try {
 
 
-      this.members = await this.dacoService.getСampaignCompleted();
-      this.tableComponent.refreshData(this.members);
-      console.log('Refreshing data');
+      this.items = await this.dacoService.getСampaignCompleted();
+      console.log('Refreshing data items=', this.items);
+      this.tableComponent.refreshData(this.items);
 
 
     } catch (e) {
