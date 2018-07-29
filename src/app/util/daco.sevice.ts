@@ -25,7 +25,7 @@ export class DacoService {
 
   private _web3: any;
   public test: any = null;
-  private accounts: string[];
+  private _accounts: string[];
   public ready = false;
   public DacoInstance: any;
   public accountsObservable = new Subject<string[]>();
@@ -50,6 +50,9 @@ export class DacoService {
     return this._web3;
   }
 
+  get accounts(): any {
+    return this._accounts;
+  }
 
   constructor(private web3Service: Web3Service) {
     console.log('Constructor: ' + 'Daco');
@@ -102,7 +105,7 @@ export class DacoService {
   watchAccount() {
     this.web3Service.accountsObservable.subscribe((accounts) => {
      
-      this.accounts = accounts;
+      this._accounts = accounts;
       console.log("watch account. daco service");
        this.accountsObservable.next(accounts);
       //this.setupDacoContract();
@@ -536,8 +539,8 @@ export class DacoService {
       //amounts.push(amountGoal + 1);
       var enddate = 1526710599;
       // debugger;
-      if (this.accounts[0])
-      var items = await this.deployedDaco.newProposal(wallets, amounts, time, descriptionOfCampaign, linkOfCampaign, { from: this.accounts[0] });
+      if (this._accounts[0])
+      var items = await this.deployedDaco.newProposal(wallets, amounts, time, descriptionOfCampaign, linkOfCampaign, { from: this._accounts[0] });
 
 
       return items;

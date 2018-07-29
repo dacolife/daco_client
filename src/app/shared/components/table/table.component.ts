@@ -97,7 +97,7 @@ export class TableComponent {
   async ngOnInit() {
 
     if (this.dacoService.web3) {
-      this.dacoService.setupDacoContract();
+      await  this.dacoService.setupDacoContract();
       await this.dacoService.test;
       var members = await this.dacoService.getMembers();
       //debugger;

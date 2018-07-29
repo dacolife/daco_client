@@ -92,6 +92,25 @@ export class ProposalComponent {
     if (this.dacoService.web3) {
       await this.dacoService.setupDacoContract();
 
+      //var member = await this.dacoService.getMember(this.dacoService.accounts[0]);
+      ////console.log('Refreshing data');
+      ////this.ng2TableData = this.tableData;
+      //var isMember = member.isMember;
+
+      //if (isMember) {
+      //  this.columns = [
+
+      //    { title: 'Vote', name: 'vote', sort: false, type: 'vote' },
+      //    { title: 'Amount ETH', name: 'amount', sort: false, type: 'text' },
+      //    { title: 'Description', name: 'description', sort: false, type: 'infolink' },
+      //    { title: 'Link', name: 'link', sort: false, type: 'descriptionlink' },
+      //    { title: 'Application date', name: 'applySince', sort: false, type: 'text' },
+      //    { title: 'Finish date', name: 'endDate', sort: false, type: 'text' }
+      //  ];
+      //};
+
+
+
       await this.refreshData();
       this.watchAccount();
     };
@@ -114,8 +133,17 @@ export class ProposalComponent {
       var isMember = member.isMember;
 
       if (isMember) {
-        this.columns.push({ title: 'Vote', name: 'vote', sort: false, type: 'vote'});
-      }
+        this.columns = [
+          { title: 'Vote', name: 'vote', sort: false, type: 'vote' },
+          { title: 'Amount ETH', name: 'amount', sort: false, type: 'text' },
+          { title: 'Description', name: 'description', sort: false, type: 'infolink' },
+          { title: 'Link', name: 'link', sort: false, type: 'descriptionlink' },
+          { title: 'Application date', name: 'applySince', sort: false, type: 'text' },
+          { title: 'Finish date', name: 'endDate', sort: false, type: 'text' }
+        ];
+      };
+
+
 
       //this.model.account = accounts[0];
       this.refreshData();
