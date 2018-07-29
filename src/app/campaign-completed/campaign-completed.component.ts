@@ -71,9 +71,12 @@ export class CampaignCompletedComponent {
 
   async ngOnInit() {
 
-    await this.dacoService.setupDacoContract();
-    await this.dacoService.test;
-    await this.refreshData();
+    if (this.dacoService.web3) {
+      await this.dacoService.setupDacoContract();
+      await this.dacoService.test;
+      await this.refreshData();
+      this.watchAccount();
+    };
 
 
   }

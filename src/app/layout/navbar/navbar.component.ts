@@ -55,7 +55,9 @@ export class NavbarComponent implements OnInit {
         [e.type === 'focus' ? 'addClass' : 'removeClass']('focus');
     });
 
-    this.watchAccount();
+    if (this.dacoService.web3) {
+      this.watchAccount();
+    }
   }
 
   watchAccount() {

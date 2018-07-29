@@ -88,10 +88,13 @@ export class ProposalComponent {
   }
 
   async ngOnInit() {
-    await this.dacoService.setupDacoContract();
-    await this.refreshData();
-    this.watchAccount();
 
+    if (this.dacoService.web3) {
+      await this.dacoService.setupDacoContract();
+
+      await this.refreshData();
+      this.watchAccount();
+    };
     //await this.refreshData();
 
 

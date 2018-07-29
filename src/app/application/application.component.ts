@@ -10,6 +10,8 @@ declare let jQuery: any;
 import { TableComponent } from '../shared/components/table/table.component';
 
 
+import { Router } from '@angular/router';
+
 
 export class StatsViewModel {
 
@@ -97,7 +99,8 @@ export class ApplicationComponent {
   constructor(
 
     private dacoService: DacoService,
-    @Inject(DOCUMENT) private document: any
+    @Inject(DOCUMENT) private document: any,
+        private router: Router
 
   ) {
     console.log('Constructor: ' + ' Application');
@@ -105,12 +108,14 @@ export class ApplicationComponent {
   }
 
   async ngOnInit() {
-
-    await this.dacoService.setupDacoContract();
-
-
-
+    if (this.dacoService.web3) {
+      await this.dacoService.setupDacoContract();
+    }
+    else {
+      this.router.navigate(['/app/faq']);
+    };
   }
+
 
   watchAccount() {
     this.dacoService.accountsObservable.subscribe((accounts) => {

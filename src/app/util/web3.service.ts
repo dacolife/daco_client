@@ -31,10 +31,13 @@ export class Web3Service {
 
   private setupMetamaskWeb3() {
     if (!this.windowRef.nativeWindow) {
-      throw new Error('Can not get the window');
+      //throw new Error('Can not get the window');
+      return;
     }
     if (!this.windowRef.nativeWindow.web3) {
-      throw new Error('Not a metamask browser');
+      //this.router.navigate(['../faq']);
+      //throw new Error('Not a metamask browser');
+      return;
     }
     this._web3 = new Web3(this.windowRef.nativeWindow.web3.currentProvider);
   }
@@ -46,11 +49,15 @@ export class Web3Service {
 
   private setupMetacoinContract() {
     this.setupMetamaskWeb3();
+    if (!this._web3)
+      return;
     this.DacoInstance = contract(daco_artifacts);
     this.DacoInstance.setProvider(this._web3.currentProvider);
   }
 
   private refreshAccounts() {
+    if (!this._web3)
+      return;
     this._web3.eth.getAccounts((err, accs) => {
       if (err != null) {
         alert(`There was an error fetching your accounts.`);

@@ -104,27 +104,12 @@ export class MemberComponent {
 
     //console.log('OnInit: ' + this);
     //console.log(this);
-    await this.dacoService.setupDacoContract();
-    await this.refreshData();
-    this.watchAccount();
-    //this.web3Service.artifactsToContract(metacoin_artifacts)
-    //  .then((MetaCoinAbstraction) => {
-    //    this.ERC223Coin = MetaCoinAbstraction;
-    //  });
-
-    // this.refreshData();
-
-    //if (this.dacoService.isLoaded)
-    //  this.refreshData();
-    //else {
-  
-    //  this.dacoService.seriveceObservable.subscribe((test) => {
-    //    alert(test);
-    //    this.refreshData();
-    //  });
-    //  this.dacoService.setupDacoContract();
-
-   // }
+    if (this.dacoService.web3) {
+      await this.dacoService.setupDacoContract();
+      await this.dacoService.test;
+      await this.refreshData();
+      this.watchAccount();
+    };
 
     const searchInput = jQuery('#table-search-input, #search-countries');
     searchInput

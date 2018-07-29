@@ -96,13 +96,14 @@ export class TableComponent {
 
   async ngOnInit() {
 
-    await this.dacoService.setupDacoContract();
-    await this.dacoService.test;
-    var members = await this.dacoService.getMembers();
-    //debugger;
-    this.watchAccount();
-  
-    //await this.refreshData();
+    if (this.dacoService.web3) {
+      this.dacoService.setupDacoContract();
+      await this.dacoService.test;
+      var members = await this.dacoService.getMembers();
+      //debugger;
+      this.watchAccount();
+    }
+
 
 
     const searchInput = jQuery('#table-search-input, #search-countries');

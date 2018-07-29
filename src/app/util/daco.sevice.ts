@@ -23,7 +23,7 @@ declare let window: any;
 @Injectable()
 export class DacoService {
 
-  private web3: any;
+  private _web3: any;
   public test: any = null;
   private accounts: string[];
   public ready = false;
@@ -46,40 +46,23 @@ export class DacoService {
   };
   status = '';
 
-
+  get web3(): any {
+    return this._web3;
+  }
 
 
   constructor(private web3Service: Web3Service) {
     console.log('Constructor: ' + 'Daco');
     //this.setupDacoContract();
     //var ewr = daco_artifacts;
-    this.web3 = web3Service.web3;
+    this._web3 = web3Service.web3;
     // alert(1);
-    this.setupDacoContract();
-    this.watchAccount();
+    if (this._web3) {
+      this.setupDacoContract();
+      this.watchAccount();
+    }
 
   };
-
-  public tDaco: any;
-
-  public async ttt() {
-    console.log("run ttt");
-    return this.pF().then((r) => {
-        console.log("set tDaco");
-        this.tDaco = r;
-    });
-  }
-
-  private pF() {
-      console.log("run pF");
-      return new Promise((resolve, reject) => {
-          console.log("run setTimeout");
-          setTimeout(() => {
-            console.log("run resolve");
-            resolve(77);
-          }, 10000);
-      })
-  }
 
 
 
@@ -274,7 +257,7 @@ export class DacoService {
         items.push({
           addressOwner: dat[3],
           addressWallet: dat[4],
-          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
+          amount: this._web3.utils.fromWei(dat[5].toFixed(), "ether"),
           //amount: dat[5].c[0]/10000,
           description: dat[6],
           link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
@@ -315,7 +298,7 @@ export class DacoService {
 
           addressOwner: dat[3],
           //addressWallet: dat[4],
-          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
+          amount: this._web3.utils.fromWei(dat[5].toFixed(), "ether"),
           description: dat[6],
           link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
           // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
@@ -394,7 +377,7 @@ export class DacoService {
           addressOwner: dat[3],
           addressWallet: dat[4],
           //amount: dat[5].c[0],
-          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
+          amount: this._web3.utils.fromWei(dat[5].toFixed(), "ether"),
           description: dat[6],
           number: i,
           link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
@@ -435,7 +418,7 @@ export class DacoService {
           addressOwner: dat[3],
           //addressWallet: dat[4],
           //amount: dat[5].c[0],
-          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
+          amount: this._web3.utils.fromWei(dat[5].toFixed(), "ether"),
           description: dat[6],
           link: data[1] ? data[1].slice(0, 4) == "http" ? data[1] : "http://" + data[1] : data[1],
           // link: data[1].indexOf("http://")<0||data[1].indexOf("https://")<0 ? data[1] : "http://"+data[1] ,
@@ -514,7 +497,7 @@ export class DacoService {
           addressOwner: dat[3],
           addressWallet: dat[4],
           //amount: dat[5].c[0],
-          amount: this.web3.utils.fromWei(dat[5].toFixed(), "ether"),
+          amount: this._web3.utils.fromWei(dat[5].toFixed(), "ether"),
           description: dat[6],
           number: +i,
           link: data[0] ? data[0].slice(0, 4) == "http" ? data[0] : "http://" + data[0] : data[0],
@@ -547,7 +530,7 @@ export class DacoService {
       wallets.push(addressWallet);
       //wallets.push(addressWallet);
       var amounts = [];
-      var saf = this.web3.utils.toWei(amountGoal, 'ether').toString();
+      var saf = this._web3.utils.toWei(amountGoal, 'ether').toString();
       debugger;
       amounts.push(saf);
       //amounts.push(amountGoal + 1);

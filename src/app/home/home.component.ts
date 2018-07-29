@@ -3,6 +3,8 @@ import { Web3Service } from '../util/web3.service';
 import { DacoService } from '../util/daco.sevice';
 import { count } from 'rxjs/operator/count';
 
+import { Router } from '@angular/router';
+
 
 
 
@@ -51,23 +53,22 @@ export class HomeComponent {
 
   constructor(
     private web3Service: Web3Service
-   , private dacoService: DacoService
+    , private dacoService: DacoService
+    ,private router: Router
   ) {
     console.log('Constructor: ' + 'HomeComponent');
     var ewr = metacoin_artifacts;
   }
 
  async ngOnInit()  {
-   await this.dacoService.setupDacoContract();
-   await this.dacoService.test;
-   await this.refreshData();
-    this.watchAccount();
- 
 
-
-
-   
-
+   if (this.dacoService.web3) {
+     await this.dacoService.setupDacoContract();
+     await this.refreshData();
+     this.watchAccount();
+   } else {
+     this.router.navigate(['/app/faq']);
+   };
   }
 
   watchAccount() {
