@@ -9,6 +9,13 @@ export const ROUTES: Routes = [{
   },
   {
     path: 'login', loadChildren: './login/login.module#LoginModule'
+  }
+  ,
+  {
+    path: 'application', loadChildren: './application/application.module#ApplicationModule'
+  },
+  {
+    path: 'faq', loadChildren: './faq/faq.module#FaqModule'
   },
   {
     path: 'error', component: ErrorComponent
@@ -16,4 +23,5 @@ export const ROUTES: Routes = [{
   {
     path: '**',    component: ErrorComponent
   }
+
 ];

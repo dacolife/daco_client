@@ -108,11 +108,16 @@ export class ApplicationComponent {
   }
 
   async ngOnInit() {
+
+    console.log(this.router.url);
     if (this.dacoService.web3) {
       await this.dacoService.setupDacoContract();
     }
     else {
-      this.router.navigate(['/app/faq']);
+      if (this.router.url == '/application')
+        this.router.navigate(['/faq']);
+      else
+        this.router.navigate(['/app/faq']);
     };
   }
 

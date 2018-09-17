@@ -24,8 +24,11 @@ export const routes = [
 
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), WidgetModule
-    , UtilModule,
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    WidgetModule,
+    UtilModule,
     PaginationModule.forRoot(),
     WidgetModule,
     Ng2TableModule,
