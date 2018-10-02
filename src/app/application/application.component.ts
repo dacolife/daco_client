@@ -10,7 +10,7 @@ declare let jQuery: any;
 import { TableComponent } from '../shared/components/table/table.component';
 
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 export class StatsViewModel {
@@ -88,11 +88,13 @@ export class ApplicationComponent {
 
 
   private counts: any[] = [];
+  private isURLparameters: boolean = false;
 
 
   status = '';
 
-  date: any = Date.now();
+  date: any = new Date( Date.now());
+  datepickerOpts: any = null;
 
 
 
@@ -100,7 +102,8 @@ export class ApplicationComponent {
 
     private dacoService: DacoService,
     @Inject(DOCUMENT) private document: any,
-        private router: Router
+    private router: Router,
+    private route: ActivatedRoute
 
   ) {
     console.log('Constructor: ' + ' Application');
@@ -110,6 +113,34 @@ export class ApplicationComponent {
   async ngOnInit() {
 
     console.log(this.router.url);
+    if (this.route.snapshot.queryParamMap.get('address')) {
+      this.isURLparameters = true;
+      this.addressWallet = this.route.snapshot.queryParamMap.get('address');
+      this.amountGoal = this.route.snapshot.queryParamMap.get('amount');
+      this.descriptionOfCampaign = this.route.snapshot.queryParamMap.get('descr');
+      this.linkOfCampaign = this.route.snapshot.queryParamMap.get('link');
+      this.date = new Date( Date.parse(this.route.snapshot.queryParamMap.get('date')));
+    }
+
+    //this.datepickerOpts = {
+    //  startDate: Date.now,
+    //  autoclose: true,
+    //  todayBtn: 'linked',
+    //  todayHighlight: true,
+    //  assumeNearbyYear: true
+    //}
+   // this.date = new Date(2016, 5, 10);
+    this.datepickerOpts = {
+      startDate: new Date(2016, 5, 10),
+      autoclose: true,
+      todayBtn: 'linked',
+      todayHighlight: true,
+      assumeNearbyYear: true,
+      format: 'D, d MM yyyy',
+      hideIcon: false
+
+    }
+
     if (this.dacoService.web3) {
       await this.dacoService.setupDacoContract();
     }

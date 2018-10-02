@@ -127,21 +127,21 @@ export class ProposalComponent {
       //var isMember =
 
         
-      var member = await this.dacoService.getMember(accounts[0]);
-      //console.log('Refreshing data');
-      //this.ng2TableData = this.tableData;
-      var isMember = member.isMember;
+      //var member = await this.dacoService.getMember(accounts[0]);
+      ////console.log('Refreshing data');
+      ////this.ng2TableData = this.tableData;
+      //var isMember = member.isMember;
 
-      if (isMember) {
-        this.columns = [
-          { title: 'Vote', name: 'vote', sort: false, type: 'vote' },
-          { title: 'Amount ETH', name: 'amount', sort: false, type: 'text' },
-          { title: 'Description', name: 'description', sort: false, type: 'infolink' },
-          { title: 'Link', name: 'link', sort: false, type: 'descriptionlink' },
-          { title: 'Application date', name: 'applySince', sort: false, type: 'text' },
-          { title: 'Finish date', name: 'endDate', sort: false, type: 'text' }
-        ];
-      };
+      //if (isMember) {
+      //  this.columns = [
+      //    { title: 'Vote', name: 'vote', sort: false, type: 'vote' },
+      //    { title: 'Amount ETH', name: 'amount', sort: false, type: 'text' },
+      //    { title: 'Description', name: 'description', sort: false, type: 'infolink' },
+      //    { title: 'Link', name: 'link', sort: false, type: 'descriptionlink' },
+      //    { title: 'Application date', name: 'applySince', sort: false, type: 'text' },
+      //    { title: 'Finish date', name: 'endDate', sort: false, type: 'text' }
+      //  ];
+      //};
 
 
 

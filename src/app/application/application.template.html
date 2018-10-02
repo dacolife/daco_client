@@ -67,7 +67,8 @@
             <div class="form-group row">
               <label for="normal-field" class="col-md-4  col-form-label text-md-right">Final date</label>
               <div class="col-md-7 ">
-                   <datetime [(ngModel)]="date" name="datetime" id="datetimepicker2i" [timepicker]="{ icon: 'fa fa-clock-o' }" [datepicker]="{ icon: 'fa fa-calendar' }"></datetime>
+                <!--ng2-datetime-->
+                <datetime [(ngModel)]="date" name="datetime" id="datetimepicker2i" [timepicker]="{ icon: 'fa fa-clock-o' }" [datepicker]="datepickerOpts"></datetime>
               </div>
             </div>
 
