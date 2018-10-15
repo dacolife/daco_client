@@ -119,7 +119,13 @@ export class ApplicationComponent {
       this.amountGoal = this.route.snapshot.queryParamMap.get('amount');
       this.descriptionOfCampaign = this.route.snapshot.queryParamMap.get('descr');
       this.linkOfCampaign = this.route.snapshot.queryParamMap.get('link');
-      this.date = new Date( Date.parse(this.route.snapshot.queryParamMap.get('date')));
+      let date = Date.parse(this.route.snapshot.queryParamMap.get('date'));
+      if (!date)
+        this.date = new Date(Date.now());
+      else
+        this.date = new Date(date);
+
+
     }
 
     //this.datepickerOpts = {
