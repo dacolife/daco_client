@@ -71,6 +71,7 @@ export class TableComponent {
 
   isLoaded: boolean = false;
   isMember: boolean = false;
+  networkName = "";
 
 
 
@@ -100,6 +101,7 @@ export class TableComponent {
       await  this.dacoService.setupDacoContract();
       await this.dacoService.test;
       var members = await this.dacoService.getMembers();
+      this.networkName = await this.dacoService.getCurrentNetwork();
       //debugger;
       this.watchAccount();
     }

@@ -132,6 +132,24 @@ export class DacoService {
   //e.numProposals();
   //ervice.numCampaigns();
   //acoService.numFinishedCampaigns();
+  //balanceOf
+  async getCurrentNetwork() {
+
+    try {
+
+
+      var num = await this.web3.eth.net.getNetworkType();
+      // const decimals = await deployedMetaCoin.decimals.call();
+      //console.log('Found balance: ' + metaCoinBalance);
+      //this.model.balance = metaCoinBalance;
+      return num;
+
+    } catch (e) {
+      console.log(e);
+      //this.setStatus('Error getting balance; see log.');
+    }
+
+  }
 
   //balanceOf
   async getNumMembers() {

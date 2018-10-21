@@ -85,6 +85,7 @@ export class ApplicationComponent {
 
   lookTransactionButton: boolean = false;
   transactionLink: string = '';
+  networkName = '';
 
 
   private counts: any[] = [];
@@ -124,10 +125,9 @@ export class ApplicationComponent {
         this.date = new Date(Date.now());
       else
         this.date = new Date(date);
-
-
     }
 
+    this.networkName = await this.dacoService.getCurrentNetwork();
     //this.datepickerOpts = {
     //  startDate: Date.now,
     //  autoclose: true,
@@ -201,7 +201,7 @@ export class ApplicationComponent {
 
   lookData() {
   
-    window.open("https://rinkeby.etherscan.io/tx/" + this.transactionLink, "_blank");
+    window.open("https://" + this.networkName+".etherscan.io/tx/" + this.transactionLink, "_blank");
   
 
 

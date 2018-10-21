@@ -43,6 +43,8 @@ export class CampaignKnownComponent {
   numPages: number = 1;
   length: number = 0;
 
+  networkName = "";
+
   config: any = {
     paging: true,
     sorting: { columns: this.columns },
@@ -71,10 +73,12 @@ export class CampaignKnownComponent {
 
   async ngOnInit() {
 
+   
 
     if (this.dacoService.web3) {
       await this.dacoService.setupDacoContract();
       await this.refreshData();
+      this.networkName = await this.dacoService.getCurrentNetwork();
       this.watchAccount();
     };
 
