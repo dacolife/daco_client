@@ -506,11 +506,11 @@ export class DacoService {
       var numProposals = await this.deployedDaco.numFinishedCampaigns();//узнать число участников
       var items: any[] = [];
       for (var i = 0; i < numProposals.c[0]; i++) {
-        var address = await this.deployedDaco.finishedCampaignsAddr(i); //узнать адрес по номеру участника
+        var hash = await this.deployedDaco.finishedCampaignsHash(i); //узнать хеш по номеру участника
 
 
-        var dat = await this.deployedDaco.getCampaignCommonInfo(address); //узнать инфу участника по адресу
-        var data = await this.deployedDaco.getCampaignFinishedInfo(address); //узнать инфу участника по адресу
+        var dat = await this.deployedDaco.getCampaignCommonInfo(hash); //узнать инфу участника по адресу
+        var data = await this.deployedDaco.getCampaignFinishedInfo(hash); //узнать инфу участника по адресу
 
 
 
